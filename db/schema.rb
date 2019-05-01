@@ -76,3 +76,4 @@ ActiveRecord::Schema.define(version: 2019_05_01_224251) do
   add_foreign_key "products", "users"
   add_foreign_key "reviews", "products"
 end
+
