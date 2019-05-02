@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   resources :orderitems
   resources :orders
   resources :products
-  resources :reviews, only: [:new, :create]
-  
 
   # nested routes
   resources :categories do
@@ -17,20 +15,20 @@ Rails.application.routes.draw do
     resources :products
   end
 
+  resources :products do
+    resources :reviews, only: [:new, :create, :index]
+  end
+
   # custom routes
-  # May have to change this route
-  post "/products/:id/review", to: "products#review", as: "review"
-  
   delete "/logout", to: "users#logout", as: "logout"
   get "/users/current", to: "users#current", as: "current_user"
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create", as: "auth_callback"
 
+  # May have to change this route, maybe we don't need this page. this sounds like a view rendering
+  # where we will render the order show page. If it is a new order, we will render the sentence "Order Confirmed!"
   get "/order/:id/confirmation", to: "orders#confirmation", as: "confirm_order"
 
-  # May have to change this route 
+  # May have to change this route
   get "/users/:id/products/:id/orderitem_id"
-
-
-
 end
