@@ -29,6 +29,6 @@ Rails.application.routes.draw do
   # where we will render the order show page. If it is a new order, we will render the sentence "Order Confirmed!"
   get "/order/:id/confirmation", to: "orders#confirmation", as: "confirm_order"
 
-  # May have to change this route
-  get "/users/:id/products/:id/orderitem_id"
+  # NEED A ROUTE FOR CONNECTING USER BY ID TO PRODUCT BY ID TO ORDER_ITEM
+  
 end
