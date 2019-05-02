@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_224251) do
+ActiveRecord::Schema.define(version: 2019_05_02_204630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2019_05_01_224251) do
 
   create_table "orders", force: :cascade do |t|
     t.string "address"
-    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,4 +75,3 @@ ActiveRecord::Schema.define(version: 2019_05_01_224251) do
   add_foreign_key "products", "users"
   add_foreign_key "reviews", "products"
 end
-

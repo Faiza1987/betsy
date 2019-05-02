@@ -30,5 +30,4 @@ Rails.application.routes.draw do
   get "/order/:id/confirmation", to: "orders#confirmation", as: "confirm_order"
 
   # NEED A ROUTE FOR CONNECTING USER BY ID TO PRODUCT BY ID TO ORDER_ITEM
-  
 end
