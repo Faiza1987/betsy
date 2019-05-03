@@ -78,4 +78,50 @@ describe ProductsController do
       must_respond_with :missing
     end
   end
+
+  describe "edit" do
+    it "should respond with found for edit existing product" do
+      get edit_product_path(Product.first)
+      must_respond_with :found
+    end
+
+    it "should respond with not found for edit non-existing product" do
+      id = bad_id
+      get edit_product_path(id)
+      must_respond_with :not_found
+    end
+  end
+
+  describe "update" do
+    it "should update product with valid data" do
+      @user = User.all.sample
+      perform_login(@user)
+
+      @product = products(:glitter_bomb)
+      updated_name = "glitter bombz"
+      put product_path(@product.id),
+          params: {
+            product: {
+              name: updated_name,
+            },
+          }
+      @product.reload
+      assert_equal updated_name, @product.name
+    end
+
+    it "should respond with bad_request with invalid data" do
+      @user = User.all.sample
+      perform_login(@user)
+
+      @product = products(:glitter_bomb)
+      updated_name = ""
+      put product_path(@product.id),
+          params: {
+            product: {
+              name: updated_name,
+            },
+          }
+      must_respond_with :bad_request
+    end
+  end
 end
