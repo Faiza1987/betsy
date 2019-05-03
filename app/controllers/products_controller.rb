@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in, only: [:review]
   before_action :product_merchant?, only: [:edit, :destroy]
 
   def index
@@ -63,28 +62,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def review
-    if @reviewer
-      @review = Review.new(rating: params[:rating], description: params[:description])
-      @review.product_id = params[:id]
-      @review.user_id = session[:user_id]
-
-      @product = Product.find_by(id: params[:id])
-
-      @user = User.find_by(id: @review.user_id)
-
-      if @user == @product.user
-        flash[:error] = "Cannot review own product."
-        redirect_to product_path(@review.product_id)
-      else @review.save
-        flash[:success] = "Review posted!"
-        redirect_to product_path(@review.product_id)       end
-    else
-      flash[:error] = "Must be logged in."
-      redirect_to product_path(id: params[:id])
-    end
-  end
-
   private
 
   def product_params
@@ -99,9 +76,5 @@ class ProductsController < ApplicationController
   def find_product
     @product = Product.find_by(id: params[:id])
     head :not_found unless @product
-  end
-
-  def logged_in?
-    @reviewer = User.find_by(id: session[:user_id])
   end
 end
