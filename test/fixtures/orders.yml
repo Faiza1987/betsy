@@ -2,10 +2,7 @@
 
 one:
   mailing_address: MyString
-  credit_card_num: 123
-  card_expiration_date: Date.parse(2019-2-3)
 
 two:
   mailing_address: MyString
-  credit_card_num: 123
-  card_expiration_date: Date.parse(2019-2-3)
+
