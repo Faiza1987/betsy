@@ -27,9 +27,24 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show
+    @orderitem = OrderItem.new
+  end
+
+  def edit
+    unless product_merchant?
+      redirect_to products_path, :alert => "Must be product merchant."
+    end
+  end
+
   private
 
   def product_params
     return params.require(:product, :name).permit(:category, :price, :stock, :user_id)
+  end
+
+  def product_merchant?
+    @user = User.find_by(id: session[:user_id])
+    @user == @product.user
   end
 end
