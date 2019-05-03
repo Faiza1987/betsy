@@ -37,6 +37,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def update
+    if @product.update(product_params)
+      flash[:success] = "Update successful!"
+      redirect_to product_path(@product.id)
+    else
+      flash[:error] = "Update failed, please check product data."
+      render :edit, status: :bad_request
+    end
+  end
+
   private
 
   def product_params
