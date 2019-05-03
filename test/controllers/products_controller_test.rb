@@ -124,4 +124,32 @@ describe ProductsController do
       must_respond_with :bad_request
     end
   end
+
+  describe "destroy" do
+    it "should destroy existing product" do
+      user = User.all.sample
+      perform_login(user)
+
+      session[:user_id] = user.id
+      product = products(:glitter_bomb)
+      expect(product.user_id).must_equal user.id
+
+      expect {
+        delete product_path(product.id)
+      }.must_change("Product.count", -1)
+
+      must_respond_with :redirect
+      must_redirect_to products_path
+      expect(flash[:success]).must_equal "Succesfully deleted!"
+    end
+
+    it "should respond with not found with product non-existing" do
+      id = bad_id
+      expect {
+        delete product_path(id)
+      }.wont_change("Product.count")
+
+      must_respond_with :not_found
+    end
+  end
 end
