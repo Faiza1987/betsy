@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in, only: [:review]
+  before_action :product_merchant?, only: [:edit, :destroy]
 
   def index
     if params[:category]
@@ -53,7 +55,7 @@ class ProductsController < ApplicationController
     if product_merchant?
       if @product.destroy
         flash[:status] = :success
-        flash[:success] = "Delete successful!"
+        flash[:success] = "Succesfully deleted!"
         redirect_to products_path
       end
     else
@@ -97,5 +99,9 @@ class ProductsController < ApplicationController
   def find_product
     @product = Product.find_by(id: params[:id])
     head :not_found unless @product
+  end
+
+  def logged_in?
+    @reviewer = User.find_by(id: session[:user_id])
   end
 end
