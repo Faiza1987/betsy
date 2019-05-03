@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+
   def index
     if params[:category]
       @title = "#{params[:category].upcase}"
@@ -47,6 +49,18 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    if product_merchant?
+      if @product.destroy
+        flash[:status] = :success
+        flash[:success] = "Delete successful!"
+        redirect_to products_path
+      end
+    else
+      redirect_to products_path, :alert => "Must be product merchant."
+    end
+  end
+
   private
 
   def product_params
@@ -56,5 +70,10 @@ class ProductsController < ApplicationController
   def product_merchant?
     @user = User.find_by(id: session[:user_id])
     @user == @product.user
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
+    head :not_found unless @product
   end
 end
