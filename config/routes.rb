@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'homepage/index'
+  get "homepage/index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "homepage#index"
-  
+
   resources :categories, only: [:create, :index, :new]
   resources :orderitems
   resources :orders
@@ -19,6 +19,10 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :reviews, only: [:new, :create, :index]
+  end
+
+  resources :orders do
+    resources :orderitems
   end
 
   # custom routes
