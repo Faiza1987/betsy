@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :categories do
     resources :products, only: [:index]
   end
+  # when there is no user logged in, the routes pick the first matching route and that is why the failing test was going to users#show
+  get "/users/current", to: "users#current", as: "current_user"
 
   resources :users do
     resources :products
@@ -26,11 +28,11 @@ Rails.application.routes.draw do
   end
 
   # custom routes
+  
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create", as: "auth_callback"
 
-  get "/users/current", to: "users#current", as: "current_user"
-delete "/logout", to: "users#destroy", as: "logout"
+  delete "/logout", to: "users#destroy", as: "logout"
 
   # May have to change this route, maybe we don't need this page. this sounds like a view rendering
   # where we will render the order show page. If it is a new order, we will render the sentence "Order Confirmed!"

@@ -7,7 +7,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    render_404 unless @user
+    if @user.nil?
+      head :not_found
+    end
   end
 
   def create
@@ -22,7 +24,8 @@ class UsersController < ApplicationController
       user = User.build_from_github(auth_hash)
 
       if user.save
-        flash[:result_text] = "Logged in as new user #{user.name}"
+        flash[:status] = :success
+        flash[:result_text] = "Logged in as new user #{user.username}"
       else
         flash[:error] = "Could not create new user account: #{user.errors.messages}"
         return redirect_to root_path
@@ -37,7 +40,6 @@ class UsersController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     if @user.nil?
       flash[:error] = "You must log in first!"
-      
       redirect_to root_path
     end
   end
