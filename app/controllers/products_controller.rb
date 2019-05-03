@@ -10,6 +10,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def new
+    @product = Product.new
+  end
+
+  def create
+    @product = Product.new(product_params)
+    @product.user_id = session[:user_id]
+
+    if @product.save
+      flash[:success] = "Product added!"
+      redirect_to product_path(@product.id)
+    else
+      flash.now[:error] = "Failed to add product, check product data."
+      render :new, status: :bad_request
+    end
+  end
+
   private
 
   def product_params
