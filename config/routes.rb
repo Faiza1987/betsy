@@ -22,10 +22,11 @@ Rails.application.routes.draw do
   end
 
   # custom routes
-  delete "/logout", to: "users#logout", as: "logout"
-  get "/users/current", to: "users#current", as: "current_user"
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create", as: "auth_callback"
+
+  get "/users/current", to: "users#current", as: "current_user"
+delete "/logout", to: "users#destroy", as: "logout"
 
   # May have to change this route, maybe we don't need this page. this sounds like a view rendering
   # where we will render the order show page. If it is a new order, we will render the sentence "Order Confirmed!"

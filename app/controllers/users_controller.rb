@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    render_404 unless @user
   end
 
   def create
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
     user = User.find_by(uid: auth_hash[:uid], provider: "github")
 
     if user
+      flash[:status] = :success
       flash[:result_text] = "Successfully logged in as #{user.username}"
     else
       user = User.build_from_github(auth_hash)
@@ -38,14 +40,14 @@ class UsersController < ApplicationController
       
       redirect_to root_path
     end
+  end
 
-    def destroy 
-      session[:user_id] = nil
-      flash[:status] = :success
-      flash[:result_text] = "Successfully logged out"
+  def destroy
+    session[:user_id] = nil
+    flash[:status] = :success
+    flash[:result_text] = "Successfully logged out"
 
-      redirect_to root_path
-    end
+    redirect_to root_path
   end
 
 
