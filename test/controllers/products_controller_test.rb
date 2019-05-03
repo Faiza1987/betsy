@@ -41,7 +41,7 @@ describe ProductsController do
       must_redirect_to product_path(Product.last)
     end
 
-    it "does not create a new product w/ invalid data" do
+    it "does not create product with missing data" do
       @user = User.all.sample
       perform_login(@user)
 
@@ -62,6 +62,20 @@ describe ProductsController do
       }.wont_change("Product.count")
 
       must_respond_with :bad_request
+    end
+  end
+
+  describe "show" do
+    it "should respond with success for show existing product" do
+      product = products(:glitter_bomb)
+      get products_path(product.id)
+      must_respond_with :success
+    end
+
+    it "should respond with missing for show non-existing product" do
+      id = bad_id
+      get product_path(id)
+      must_respond_with :missing
     end
   end
 end
