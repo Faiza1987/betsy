@@ -8,4 +8,17 @@ class Product < ApplicationRecord
   has_many :reviews
   has_many :orderitems
   has_many :orders, :through => orderitems
+
+  def average_rating
+    num_ratings = self.reviews.count
+    return 0 if num_ratings == 0
+
+    total = 0
+    self.reviews.each do |review|
+      total += review.rating
+    end
+
+    average = (total / num_ratings)
+    return average
+  end
 end
