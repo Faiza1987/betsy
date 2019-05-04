@@ -38,19 +38,16 @@ describe OrderitemsController do
       test_input = {
         "orderitem": {
           quantity: input_quantity,
-          order_id: orders(:one).id,
-          product_id: products(:two).id,
         },
       }
 
       expect {
-        post orderitems_path, params: test_input
+        post product_orderitems_path(products(:two).id), params: test_input
       }.must_change "Orderitem.count", 1
 
-      new_orderitem = Orderitem.find_by(order_id: orders(:one).id)
+      new_orderitem = Orderitem.find_by(product_id: products(:two).id)
       expect(new_orderitem).wont_be_nil
       expect(new_orderitem.quantity).must_equal input_quantity
-      expect(new_orderitem.order_id).must_equal orders(:one).id
       expect(new_orderitem.product_id).must_equal products(:two).id
 
       must_respond_with :redirect
