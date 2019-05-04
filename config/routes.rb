@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     resources :orderitems
   end
 
+  resources :products do
+    resources :orderitems
+  end
+
   # custom routes
   delete "/logout", to: "users#logout", as: "logout"
   get "/users/current", to: "users#current", as: "current_user"
