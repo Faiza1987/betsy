@@ -69,6 +69,7 @@ gem 'jquery-turbolinks'
 gem 'bootstrap', '~> 4.1.3'
 group :development, :test do
   gem 'pry-rails'
+  gem 'simplecov'
 end
 
 group :development do
