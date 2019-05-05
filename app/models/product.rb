@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :reviews
   has_many :orderitems
-  has_many :orders, :through => orderitems
+  has_many :orders, :through => :orderitems
 
   def average_rating
     num_ratings = self.reviews.count

@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+trick:
   quantity: 1
+  order: one
+  product: honk
 
-two:
-  quantity: 1
+treat:
+  quantity: 2
+  order: two
+  product: chair
