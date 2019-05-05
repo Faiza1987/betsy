@@ -22,26 +22,13 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
 
     if @product.save
-      flash[:success] = "Successfully created product!"
+      flash[:success] = "Product added!"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = @product.errors
+      flash[:error] = "Failed to add product, check product data."
       render :new, status: :bad_request
     end
   end
-
-  # def create
-  #   @product = Product.new(product_params)
-  #   @product.user_id = session[:user_id]
-
-  #   if @product.save
-  #     flash[:success] = "Product added!"
-  #     redirect_to product_path(@product.id)
-  #   else
-  #     flash.now[:error] = "Failed to add product, check product data."
-  #     render :new, status: :bad_request
-  #   end
-  # end
 
   def show
     @orderitem = OrderItem.new
