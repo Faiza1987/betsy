@@ -2,6 +2,10 @@
 
 trick:
   quantity: 1
+  order: one
+  product: honk
 
 treat:
   quantity: 2
+  order: two
+  product: chair

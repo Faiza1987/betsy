@@ -23,6 +23,7 @@ class OrderitemsController < ApplicationController
     op = order_item_params
     op[:order_id] = order_id
     op[:product_id] = params[:product_id]
+
     order_item = Orderitem.new(op)
 
     is_successful = order_item.save

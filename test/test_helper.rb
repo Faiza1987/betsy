@@ -3,13 +3,14 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
+require "simplecov"
+SimpleCov.start
 #  For colorful output!
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
   ENV,
   Minitest.backtrace_filter
 )
-
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -29,13 +30,13 @@ class ActiveSupport::TestCase
 
   def mock_auth_hash(user)
     return {
-      provider: user.provider,
-      uid: user.uid,
-      info: {
-        email: user.email,
-        name: user.username,
-      },
-    }
+             provider: user.provider,
+             uid: user.uid,
+             info: {
+               email: user.email,
+               name: user.username,
+             },
+           }
   end
 
   def perform_login(user = nil)
