@@ -48,6 +48,7 @@ class OrdersController < ApplicationController
 
     if is_successful
       flash[:success] = "Order was placed successully"
+      cookies.delete :order_id
       redirect_to order_path(@order.id)
     else
       @order_item.errors.messages.each do |field, messages|
@@ -60,7 +61,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    puts :order
     return params.require(:order).permit(
              :name, :email, :mailing_address,
              :credit_card_num, :card_expiration_date,

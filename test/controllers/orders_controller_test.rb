@@ -47,12 +47,23 @@ describe OrdersController do
     end
 
     describe "update action" do
-      let(:sample_order) { orders(:two) }
+      before do
+        input_quantity = 3
+        test_input = {
+          "orderitem": {
+            quantity: input_quantity,
+          },
+        }
+        post product_orderitems_path(product.id), params: test_input
+      end
+
+      let(:sample_order) { Order.find_by(id: cookies[:order_id]) }
       let(:product) { products(:chair) }
 
-      it "should change the order status from pending to paid and reduce product stock" do
+      it "should change the order status from pending to paid, reduce product stock and clear all cookies" do
         current_stock = product.stock
-
+        puts "in test before: #{cookies[:order_id]}"
+        puts "sample order: #{sample_order.id}"
         input_name = "Elmo"
         input_email = "elmo@friends.com"
 
@@ -76,6 +87,7 @@ describe OrdersController do
         expect(product.stock).must_equal remaining_stock
         expect(sample_order.status).must_equal "Paid"
         expect(flash[:success]).must_equal "Order was placed successully"
+        expect(cookies[:order_id]).must_equal ""
 
         must_respond_with :redirect
         must_redirect_to order_path(sample_order.id)
