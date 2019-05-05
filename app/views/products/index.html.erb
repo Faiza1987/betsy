@@ -3,10 +3,9 @@
 <div>
   <% @products.each do |product| %>
   <a href="<%= product_path(product) %>">
-    <p><%= product.category %></p>
-    <h2><%= product.quantity %> <%= product.name %></h2>
+    <p><%= product.category_ids %></p>
+    <h2><%= product.stock %> <%= product.name %></h2>
     <p>$ <%= ("%.2f" % product.price) %></p>
-    <%= show_product_reviews?(product) %>
   </a>
   <% end %>
 </div>

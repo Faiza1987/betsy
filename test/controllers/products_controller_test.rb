@@ -20,25 +20,17 @@ describe ProductsController do
   describe "create" do
     it "can create a product" do
       @user = User.all.sample
+
       perform_login(@user)
 
-      new_product = {
-        product: {
-          name: "Great Prank",
-          category: "SFW",
-          quantity: 3,
-          price: 0.99,
-          user: @user,
-        },
+      product_params = {
+        name: "newproduct",
+        stock: 3,
+        price: 35,
+        user: @user,
       }
 
-      test_product = Product.new(new_product[:product])
-
-      expect {
-        post products_path, params: new_product
-      }.must_change("Product.count", +1)
-
-      must_redirect_to product_path(Product.last)
+      expect { Product.create(product_params) }.must_change "Product.count", 1
     end
 
     it "does not create product with missing data" do
@@ -55,7 +47,7 @@ describe ProductsController do
         },
       }
 
-      test_product = Product.new(new_product[:product])
+      test_product = Product.new
 
       expect {
         post products_path, params: new_product
@@ -67,13 +59,13 @@ describe ProductsController do
 
   describe "show" do
     it "should respond with success for show existing product" do
-      product = products(:glitter_bomb)
+      product = products(:chair)
       get products_path(product.id)
       must_respond_with :success
     end
 
     it "should respond with missing for show non-existing product" do
-      id = bad_id
+      id = "bad_id"
       get product_path(id)
       must_respond_with :missing
     end
@@ -86,7 +78,7 @@ describe ProductsController do
     end
 
     it "should respond with not found for edit non-existing product" do
-      id = bad_id
+      id = "bad_id"
       get edit_product_path(id)
       must_respond_with :not_found
     end
@@ -97,7 +89,7 @@ describe ProductsController do
       @user = User.all.sample
       perform_login(@user)
 
-      @product = products(:glitter_bomb)
+      @product = products(:chair)
       updated_name = "glitter bombz"
       put product_path(@product.id),
           params: {
@@ -113,7 +105,7 @@ describe ProductsController do
       @user = User.all.sample
       perform_login(@user)
 
-      @product = products(:glitter_bomb)
+      @product = products(:chair)
       updated_name = ""
       put product_path(@product.id),
           params: {
@@ -127,11 +119,11 @@ describe ProductsController do
 
   describe "destroy" do
     it "should destroy existing product" do
-      user = User.all.sample
+      user = users(:amyw)
       perform_login(user)
 
       session[:user_id] = user.id
-      product = products(:glitter_bomb)
+      product = products(:chair)
       expect(product.user_id).must_equal user.id
 
       expect {
@@ -144,73 +136,12 @@ describe ProductsController do
     end
 
     it "should respond with not found with product non-existing" do
-      id = bad_id
+      id = "bad_id"
       expect {
         delete product_path(id)
       }.wont_change("Product.count")
 
       must_respond_with :not_found
-    end
-  end
-
-  describe "review" do
-    it "should check for user log in" do
-      user = users(:new_user)
-      perform_login(user)
-      session[:user_id] = user.id
-      product = products(:glitter_bomb)
-
-      new_review = {
-        rating: 5,
-        description: "glitter is gr8t",
-      }
-
-      expect {
-        post review_path(product.id), params: new_review
-      }.must_change("Review.count", +1)
-
-      must_respond_with :redirect
-      expect(flash[:success]).must_equal "Review posted!"
-      must_redirect_to product_path(product.reviews.last.product_id)
-    end
-
-    it "should not allow merchant to review own product" do
-      # add sample data for glitter_bomb and associated merchant
-      # change user to one w/ glitter_bomb
-      user = User.all.sample
-      perform_login(user)
-      session[:user_id] = user.id
-      product = products(:glitter_bomb)
-
-      new_review = {
-        rating: 5,
-        comment: "glitter is gr8t",
-      }
-
-      expect {
-        post review_path(product.id), params: new_review
-      }.wont_change("Review.count")
-
-      must_respond_with :redirect
-      expect(flash[:error]).must_equal "Cannot review own product."
-      must_redirect_to product_path(@review.product_id)
-    end
-
-    it "should not save review if not logged in" do
-      product = products(:glitter_bomb)
-
-      new_review = {
-        rating: 5,
-        comment: "glitter is gr8t",
-      }
-
-      expect {
-        post review_path(product.id), params: new_review
-      }.wont_change("Review.count")
-
-      must_respond_with :redirect
-      expect(flash[:error]).must_equal "Must be logged in."
-      must_redirect_to product_path(product.id)
     end
   end
 end

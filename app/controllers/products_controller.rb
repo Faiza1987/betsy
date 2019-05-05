@@ -3,9 +3,9 @@ class ProductsController < ApplicationController
   before_action :product_merchant?, only: [:edit, :destroy]
 
   def index
-    if params[:category]
-      @title = "#{params[:category].upcase}"
-      @products = Product.where(:category => params[:category])
+    if params[:category_id]
+      @title = "#{params[:category_id].upcase}"
+      @products = Product.where(:category_id => params[:category_id])
       @products = @products.order(:name)
     else
       @title = "All Products"
@@ -22,13 +22,26 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
 
     if @product.save
-      flash[:success] = "Product added!"
+      flash[:success] = "Successfully created product!"
       redirect_to product_path(@product.id)
     else
-      flash.now[:error] = "Failed to add product, check product data."
+      flash[:error] = @product.errors
       render :new, status: :bad_request
     end
   end
+
+  # def create
+  #   @product = Product.new(product_params)
+  #   @product.user_id = session[:user_id]
+
+  #   if @product.save
+  #     flash[:success] = "Product added!"
+  #     redirect_to product_path(@product.id)
+  #   else
+  #     flash.now[:error] = "Failed to add product, check product data."
+  #     render :new, status: :bad_request
+  #   end
+  # end
 
   def show
     @orderitem = OrderItem.new
@@ -65,7 +78,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product, :name).permit(:category, :price, :stock, :user_id, orderitem_ids: [])
+    return params.require(:product).permit(:name, :category_id, :price, :stock, :user_id, orderitem_ids: [])
   end
 
   def product_merchant?
