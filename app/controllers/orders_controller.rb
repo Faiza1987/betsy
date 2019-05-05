@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :require_login, except: [:show]
+  before_action :require_login, only: [:index]
 
   def index
-    user_products = Product.find_by(user_id: session[:user_id])
+    user_products = Product.where(user_id: session[:user_id])
+
     @orders = []
     user_products.each do |product|
       product.orderitem_ids.each do |id|
@@ -13,7 +14,6 @@ class OrdersController < ApplicationController
 
     if @orders.empty?
       flash[:message] = "You do not have any existing orders"
-      # need to figure out where we want to redirect to be most user-friendly
       redirect_to root_path
     end
 
@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find_by(id: params[:id])
     if @order.nil?
       flash[:error] = "Unknown order"
       redirect_to root_path
@@ -31,14 +32,18 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @order = Order.find_by(id: params[:id])
+
     is_successful = @order.update(order_params)
+
+    @order.update_attributes(:status => "Paid")
 
     @order.orderitem_ids.each do |id|
       order_item = Orderitem.find_by(id: id)
       order_item_quantity = order_item.quantity
       product = Product.find_by(id: order_item.product_id)
       new_quantity = product.stock - order_item_quantity
-      product.update(stock: new_quantity)
+      product.update_attributes(:stock => new_quantity)
     end
 
     if is_successful
@@ -55,10 +60,11 @@ class OrdersController < ApplicationController
   private
 
   def order_params
+    puts :order
     return params.require(:order).permit(
              :name, :email, :mailing_address,
              :credit_card_num, :card_expiration_date,
-             :cvv, :billing_zip_code, orderitem_ids: [],
+             :cvv, :billing_zip_code, :status, orderitem_ids: [],
            )
   end
 end
