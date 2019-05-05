@@ -39,6 +39,13 @@ describe OrdersController do
   end
 
   describe "guest users" do
+    describe "index action" do
+      it "should not let guest user view list of orders" do
+        get orders_path
+        expect(flash[:error]).must_equal "You must log in first."
+      end
+    end
+
     describe "update action" do
       let(:sample_order) { orders(:two) }
       let(:product) { products(:chair) }
