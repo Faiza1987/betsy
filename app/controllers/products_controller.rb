@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @orderitem = OrderItem.new
+    @product = Product.new
   end
 
   def edit
