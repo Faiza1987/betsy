@@ -1,16 +1,10 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :product_merchant?, only: [:edit, :destroy]
+  before_action :product_merchant?, only: [:edit, :update, :destroy]
+  before_action :require_login, only: [:new, :create, :edit, :update]
 
   def index
-    if params[:category_id]
-      @title = "#{params[:category_id].upcase}"
-      @products = Product.where(:category_id => params[:category_id])
-      @products = @products.order(:name)
-    else
-      @title = "All Products"
-      @products = Product.all.order(:name)
-    end
+    @products = Product.all
   end
 
   def new
@@ -25,13 +19,19 @@ class ProductsController < ApplicationController
       flash[:success] = "Product added!"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Failed to add product, check product data."
+      @product.errors.messages.each do |field, message|
+        flash.now[field] = message
+      end
+
       render :new, status: :bad_request
     end
   end
 
   def show
-    @product = Product.new
+    if @product.nil?
+      flash[:error] = "Unknown product"
+      redirect_to products_path
+    end
   end
 
   def edit
@@ -65,7 +65,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :category_id, :price, :stock, :user_id, orderitem_ids: [])
+    return params.require(:product).permit(:name, :price, :stock, :user_id, category_ids: [], orderitem_ids: [])
   end
 
   def product_merchant?
@@ -75,6 +75,5 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find_by(id: params[:id])
-    head :not_found unless @product
   end
 end
