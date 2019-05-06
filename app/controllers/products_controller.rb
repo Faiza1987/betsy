@@ -59,14 +59,20 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if product_merchant?
-      if @product.destroy
-        flash[:status] = :success
-        flash[:success] = "Succesfully deleted!"
-        redirect_to products_path
-      end
-    else
-      redirect_to products_path, :alert => "Must be product merchant to delete."
+    @product = Product.find_by(id: params[:id])
+
+    if @product.nil?
+      flash[:error] = "Unknown product"
+      return redirect_to products_path
+    end
+
+    if session[:user_id] != @product.user_id
+      return redirect_to product_path(params[:id]), :alert => "Must be the merchant of this product to edit."
+    end
+
+    if @product.destroy
+      flash[:success] = "Succesfully deleted!"
+      redirect_to products_path
     end
   end
 

@@ -144,53 +144,64 @@ describe ProductsController do
 
     describe "update" do
       it "should update product with valid data" do
-        @user = User.all.sample
-        perform_login(@user)
+        product_to_update = products(:chair)
+        new_name = "glitter bombz"
+        test_input = {
+          "product": {
+            name: new_name,
+            user_id: session[:user_id],
+          },
+        }
 
-        @product = products(:chair)
-        updated_name = "glitter bombz"
-        put product_path(@product.id),
-            params: {
-              product: {
-                name: updated_name,
-              },
-            }
-        @product.reload
-        assert_equal updated_name, @product.name
+        expect {
+          patch product_path(product_to_update), params: test_input
+        }.wont_change("Product.count")
+
+        expect(flash[:success]).must_equal "Update successful!"
+        must_respond_with :redirect
+        must_redirect_to product_path(product_to_update)
       end
 
       it "should respond with bad_request with invalid data" do
-        @user = User.all.sample
-        perform_login(@user)
+        product_to_update = products(:chair)
+        test_input = {
+          "product": {
+            name: "",
+            user_id: session[:user_id],
+          },
+        }
 
-        @product = products(:chair)
-        updated_name = ""
-        put product_path(@product.id),
-            params: {
-              product: {
-                name: updated_name,
-              },
-            }
+        expect {
+          patch product_path(product_to_update), params: test_input
+        }.wont_change("Product.count")
+
+        expect(flash[:name]).must_equal ["can't be blank"]
         must_respond_with :bad_request
       end
     end
 
     describe "destroy" do
       it "should destroy existing product" do
-        user = users(:amyw)
-        perform_login(user)
-
-        session[:user_id] = user.id
-        product = products(:chair)
-        expect(product.user_id).must_equal user.id
+        existing_product = products(:honk)
 
         expect {
-          delete product_path(product.id)
-        }.must_change("Product.count", -1)
+          delete product_path(existing_product.id)
+        }.must_change "Product.count", -1
 
         must_respond_with :redirect
         must_redirect_to products_path
         expect(flash[:success]).must_equal "Succesfully deleted!"
+      end
+
+      it "should not let a seller who is not the owner of the product delete the product" do
+        existing_product = products(:chair)
+
+        expect {
+          delete product_path(existing_product.id)
+        }.wont_change "Product.count"
+
+        expect(flash[:alert]).must_equal "Must be the merchant of this product to edit."
+        must_respond_with :redirect
       end
 
       it "should respond with not found with product non-existing" do
@@ -199,7 +210,9 @@ describe ProductsController do
           delete product_path(id)
         }.wont_change("Product.count")
 
-        must_respond_with :not_found
+        expect(flash[:error]).must_equal "Unknown product"
+        must_respond_with :redirect
+        must_redirect_to products_path
       end
     end
   end
