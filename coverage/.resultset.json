@@ -1,30 +1,36 @@
 {
   "MiniTest": {
     "coverage": {
-      "/Users/elisepham/Ada/betsy/app/controllers/categories_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/categories_controller.rb": [
         1,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/application_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/application_controller.rb": [
         1,
+        1,
+        null,
+        null,
+        1,
+        3,
+        null,
+        3,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
         1,
         null,
         1,
         48,
+        11,
         null,
-        null,
-        1,
-        3,
-        null,
-        3,
-        1,
-        null,
-        1,
         null,
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/test/controllers/homepage_controller_test.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/controllers/homepage_controller_test.rb": [
         1,
         null,
         1,
@@ -35,13 +41,13 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/homepage_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/homepage_controller.rb": [
         1,
         1,
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/test/controllers/orderitems_controller_test.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/controllers/orderitems_controller_test.rb": [
         1,
         null,
         1,
@@ -207,7 +213,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/orderitems_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/orderitems_controller.rb": [
         1,
         1,
         null,
@@ -303,7 +309,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/test/controllers/orders_controller_test.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/controllers/orders_controller_test.rb": [
         1,
         null,
         1,
@@ -402,7 +408,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/orders_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/orders_controller.rb": [
         1,
         1,
         null,
@@ -474,7 +480,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/test/controllers/products_controller_test.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/controllers/products_controller_test.rb": [
         1,
         null,
         1,
@@ -623,7 +629,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/products_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/products_controller.rb": [
         1,
         1,
         1,
@@ -705,7 +711,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/test/controllers/reviews_controller_test.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/controllers/reviews_controller_test.rb": [
         1,
         null,
         1,
@@ -777,7 +783,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/reviews_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/reviews_controller.rb": [
         1,
         1,
         null,
@@ -820,7 +826,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/test/controllers/users_controller_test.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/controllers/users_controller_test.rb": [
         1,
         null,
         1,
@@ -923,7 +929,7 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/controllers/users_controller.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/controllers/users_controller.rb": [
         1,
         null,
         null,
@@ -982,18 +988,108 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/review.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/helpers/application_helper_test.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/models/category_test.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/models/order_test.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/models/orderitem_test.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/models/product_test.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/models/review_test.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/test/models/user_test.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/review.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/application_record.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/product.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/product.rb": [
         1,
         1,
         1,
@@ -1019,12 +1115,12 @@
         null,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/category.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/category.rb": [
         1,
         1,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/orderitem.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/orderitem.rb": [
         1,
         1,
         1,
@@ -1032,13 +1128,13 @@
         1,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/order.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/order.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/elisepham/Ada/betsy/app/models/user.rb": [
+      "/Users/faizahusain/Documents/Ada_Classwork/Ruby_on_Rails/betsy/app/models/user.rb": [
         1,
         1,
         null,
@@ -1049,6 +1145,6 @@
         null
       ]
     },
-    "timestamp": 1557093540
+    "timestamp": 1557171088
   }
 }
