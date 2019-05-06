@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     resources :orderitems
   end
 
+  resources :products do
+    resources :orderitems
+  end
+
   # custom routes
   
   get "/auth/github", as: "github_login"

@@ -4,20 +4,14 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
+require "simplecov"
+SimpleCov.start
 #  For colorful output!
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
   ENV,
   Minitest.backtrace_filter
 )
-
-SimpleCov.start 'rails' do
-  add_filter '/bin/'
-  add_filter '/db/'
-  add_filter '/spec/' # for rspec
-  add_filter '/test/' # for minitest
-end
-
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -37,13 +31,13 @@ class ActiveSupport::TestCase
 
   def mock_auth_hash(user)
     return {
-      provider: user.provider,
-      uid: user.uid,
-      info: {
-        email: user.email,
-        name: user.username,
-      },
-    }
+             provider: user.provider,
+             uid: user.uid,
+             info: {
+               email: user.email,
+               name: user.username,
+             },
+           }
   end
 
   def perform_login(user = nil)
