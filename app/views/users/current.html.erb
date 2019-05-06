@@ -1,3 +1,7 @@
-<h2>
+<section>
   <h4> Welcome <%= @user.username %>! </h4>
-</h2>
+</section>
+
+<section>
+  <%= link_to "Add a new product", new_product_path, method: :get%>
+</section>
