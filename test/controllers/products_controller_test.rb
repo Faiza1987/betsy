@@ -19,6 +19,22 @@ describe ProductsController do
         expect(flash[:error]).must_equal "You must log in first."
       end
     end
+
+    describe "show" do
+      it "should respond with success for show existing product" do
+        product = products(:chair)
+        get products_path(product.id)
+        must_respond_with :success
+      end
+
+      it "should respond with missing for show non-existing product" do
+        id = "bad_id"
+        get product_path(id)
+        expect(flash[:error]).must_equal "Unknown product"
+        must_respond_with :redirect
+        must_redirect_to products_path
+      end
+    end
   end
 
   describe "Logged In User" do
@@ -92,7 +108,9 @@ describe ProductsController do
       it "should respond with missing for show non-existing product" do
         id = "bad_id"
         get product_path(id)
-        must_respond_with :missing
+        expect(flash[:error]).must_equal "Unknown product"
+        must_respond_with :redirect
+        must_redirect_to products_path
       end
     end
 
