@@ -42,13 +42,14 @@ describe OrderitemsController do
       }
 
       expect {
-        post product_orderitems_path(products(:two).id), params: test_input
+        post product_orderitems_path(products(:chair).id), params: test_input
       }.must_change "Orderitem.count", 1
 
-      new_orderitem = Orderitem.find_by(product_id: products(:two).id)
+      new_orderitem = Orderitem.where(quantity: input_quantity, product_id: products(:chair).id).first
+
       expect(new_orderitem).wont_be_nil
       expect(new_orderitem.quantity).must_equal input_quantity
-      expect(new_orderitem.product_id).must_equal products(:two).id
+      expect(new_orderitem.product_id).must_equal products(:chair).id
 
       must_respond_with :redirect
     end
@@ -59,7 +60,7 @@ describe OrderitemsController do
         "orderitem": {
           quantity: input_quantity,
           order_id: orders(:one).id,
-          product_id: products(:two).id,
+          product_id: products(:chair).id,
         },
       }
 
@@ -77,14 +78,14 @@ describe OrderitemsController do
       starter_input = {
         quantity: 3,
         order_id: orders(:one).id,
-        product_id: products(:two).id,
+        product_id: products(:chair).id,
       }
 
       orderitem_to_update = Orderitem.create(starter_input)
 
       input_quantity = 9
       input_order_id = orders(:one).id
-      input_product_id = products(:two).id
+      input_product_id = products(:chair).id
       test_input = {
         "orderitem": {
           quantity: input_quantity,
@@ -108,14 +109,14 @@ describe OrderitemsController do
       starter_input = {
         quantity: 3,
         order_id: orders(:one).id,
-        product_id: products(:two).id,
+        product_id: products(:chair).id,
       }
 
       orderitem_to_update = Orderitem.create(starter_input)
 
       input_quantity = "" # Invalid Quantity
       input_order = orders(:one).id
-      input_product = products(:two).id
+      input_product = products(:chair).id
       test_input = {
         "orderitem": {
           quantity: input_quantity,
@@ -150,7 +151,7 @@ describe OrderitemsController do
     end
 
     it "can delete an order item" do
-      new_order_item = Orderitem.create(quantity: 3, order_id: orders(:one).id, product_id: products(:two).id)
+      new_order_item = Orderitem.create(quantity: 3, order_id: orders(:one).id, product_id: products(:chair).id)
 
       expect {
         delete orderitem_path(new_order_item.id)

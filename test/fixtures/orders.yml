@@ -1,11 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  mailing_address: MyString
-  credit_card_num: 123
-  card_expiration_date: Date.parse(2019-2-3)
+  name: elise
+  email: elise@abc.com
+  mailing_address: 123 Small Street
+  credit_card_num: 345
+  card_expiration_date: 2019-04-30
+  cvv: 655
+  billing_zip_code: 98107
+  status: Pending
 
 two:
-  mailing_address: MyString
-  credit_card_num: 123
-  card_expiration_date: Date.parse(2019-2-3)
+  name: amy
+  email: amy@abc.com
+  mailing_address: 456 Big Street
+  credit_card_num: 567
+  card_expiration_date: 2019-06-30
+  cvv: 788
+  billing_zip_code: 98443
+  status: Pending

@@ -1,0 +1,7 @@
+<h2>List of Users</h2>
+
+<% @users.each do |user| %>
+  <%= link_to user.username, user_path(user) %>
+<% end %>
+
+<%= link_to "Home", root_path %>

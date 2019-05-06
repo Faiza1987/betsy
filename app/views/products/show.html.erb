@@ -1,0 +1,9 @@
+<section>
+  <h2><%= @product.name.upcase %></h2>
+</section>
+
+<section>
+  <p>Stock: <%= @product.stock %></p>
+  <p>Price: <%= @product.price %></p>
+  <p><%= button_to "Add item to cart", new_orderitem_path, method: :get %></p>
+</section>

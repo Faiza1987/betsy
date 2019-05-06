@@ -1,13 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  username: MyString
+faiza:
+  username: faizaahsan
   uid: 1
-  provider: MyString
-  email: MyString
+  provider: github
+  email: faiza@email.com
 
-two:
-  username: MyString
-  uid: 1
-  provider: MyString
-  email: MyString
+amyw:
+  username: amywyatt
+  uid: 2
+  provider: github
+  email: amyw@email.com
+
+elise:
+  username: elisepham
+  uid: 3
+  provider: github
+  email: elise@email.com
+
+laneia:
+  username: laneiamurray
+  uid: 4
+  provider: github
+  email: laneia@email.com
