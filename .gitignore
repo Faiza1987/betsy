@@ -29,6 +29,5 @@
 # ENV
 .env
 
-# SimpleCov
-coverage/*
 coverage
+coverage/*
