@@ -2,6 +2,7 @@
 
 <ul>
 <% @order_items.each do |order_item| %>
+  <li><%= link_to Product.find_by(order_item.product_id), product_path(order_item.product_id) %></li>
   <li><%= link_to order_item.id, orderitem_path(order_item.id) %></li>
   <li><%= link_to "Edit #{@order_item.product_id.name}", edit_orderitem_path(@order_item.id) %></li>
   <li><%= link_to "Remove #{@order_item.product_id.name}", 
