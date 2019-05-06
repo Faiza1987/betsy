@@ -11,26 +11,6 @@ describe UsersController do
       must_respond_with :success
     end
   end
-
-  describe "show" do
-    it "returns success when given a vaild id" do
-      # Arrange 
-      user = User.create(username: 'Faiza')
-      uid = user.id
-
-      # Act 
-      get user_path(uid)
-
-      # Assert
-      must_respond_with :success
-    end
-
-    it "returns not_found when given an invaild id" do
-      uid = -1
-      get user_path(uid)
-      must_respond_with :not_found
-    end
-  end
   
   describe "login" do
     it "can log in an existing user" do
@@ -67,6 +47,30 @@ describe UsersController do
       expect(new_user.username).must_equal user.username
       expect(flash[:status]).must_equal :success
     end
+
+    it "will respond with a redirect if a user is coming from somewhere other than github" do
+
+      invalid_user = User.find_by(provider: "facebook")
+
+      expect {
+        perform_login(invalid_user)
+      }.wont_change "User.count", 1
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+
+    it "redirects to the login route if given invalid user data" do
+      invalid_user = User.new(provider: "githib", username: "", uid: 50, email: "")
+
+      expect{
+        perform_login(invalid_user)
+      }.wont_change "User.count", 1
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
+
   end
 
   describe "current" do
