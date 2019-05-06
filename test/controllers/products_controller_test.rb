@@ -125,8 +125,8 @@ describe ProductsController do
 
     describe "edit" do
       it "should respond with found for edit existing product" do
-        get edit_product_path(Product.first)
-        must_respond_with :found
+        get edit_product_path(products(:honk))
+        must_respond_with :success
       end
 
       it "should respond with redirect and error for edit non-existing product" do
@@ -137,6 +137,8 @@ describe ProductsController do
       end
 
       it "should respond with a flash message when a seller tries to edit a product that is not theirs" do
+        get edit_product_path(products(:chair))
+        expect(flash[:alert]).must_equal "Must be the merchant of this product to edit."
       end
     end
 

@@ -41,10 +41,8 @@ class ProductsController < ApplicationController
       return redirect_to products_path
     end
 
-    is_valid_merchant = product_merchant?(@product)
-
-    if !is_valid_merchant
-      redirect_to products_path, :alert => "Must be the merchant of this product to edit."
+    if session[:user_id] != @product.user_id
+      redirect_to product_path(params[:id]), :alert => "Must be the merchant of this product to edit."
     end
   end
 
@@ -76,10 +74,6 @@ class ProductsController < ApplicationController
 
   def product_params
     return params.require(:product).permit(:name, :price, :stock, :user_id, category_ids: [], orderitem_ids: [])
-  end
-
-  def product_merchant?(product)
-    return session[:user_id] == product.user_id
   end
 
   def find_product
