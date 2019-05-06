@@ -27,12 +27,21 @@ describe ProductsController do
         must_respond_with :success
       end
 
-      it "should respond with missing for show non-existing product" do
+      it "should respond with error for show non-existing product" do
         id = "bad_id"
         get product_path(id)
         expect(flash[:error]).must_equal "Unknown product"
         must_respond_with :redirect
         must_redirect_to products_path
+      end
+    end
+
+    describe "edit" do
+      it "should respond with error when unauthorized user tries to edit existing product" do
+        get edit_product_path(Product.first)
+        must_respond_with :redirect
+        must_redirect_to root_path
+        expect(flash[:error]).must_equal "You must log in first."
       end
     end
   end
@@ -120,10 +129,14 @@ describe ProductsController do
         must_respond_with :found
       end
 
-      it "should respond with not found for edit non-existing product" do
+      it "should respond with redirect and error for edit non-existing product" do
         id = "bad_id"
         get edit_product_path(id)
-        must_respond_with :not_found
+        must_respond_with :redirect
+        expect(flash[:error]).must_equal "Unknown product"
+      end
+
+      it "should respond with a flash message when a seller tries to edit a product that is not theirs" do
       end
     end
 

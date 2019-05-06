@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :product_merchant?, only: [:edit, :update, :destroy]
   before_action :require_login, only: [:new, :create, :edit, :update]
 
   def index
@@ -35,8 +34,17 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    unless product_merchant?
-      redirect_to products_path, :alert => "Must be product merchant."
+    @product = Product.find_by(id: params[:id])
+
+    if @product.nil?
+      flash[:error] = "Unknown product"
+      return redirect_to products_path
+    end
+
+    is_valid_merchant = product_merchant?(@product)
+
+    if !is_valid_merchant
+      redirect_to products_path, :alert => "Must be the merchant of this product to edit."
     end
   end
 
@@ -45,7 +53,9 @@ class ProductsController < ApplicationController
       flash[:success] = "Update successful!"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Update failed, please check product data."
+      @product.errors.messages.each do |field, message|
+        flash.now[field] = message
+      end
       render :edit, status: :bad_request
     end
   end
@@ -58,7 +68,7 @@ class ProductsController < ApplicationController
         redirect_to products_path
       end
     else
-      redirect_to products_path, :alert => "Must be product merchant."
+      redirect_to products_path, :alert => "Must be product merchant to delete."
     end
   end
 
@@ -68,9 +78,8 @@ class ProductsController < ApplicationController
     return params.require(:product).permit(:name, :price, :stock, :user_id, category_ids: [], orderitem_ids: [])
   end
 
-  def product_merchant?
-    @user = User.find_by(id: session[:user_id])
-    @user == @product.user
+  def product_merchant?(product)
+    return session[:user_id] == product.user_id
   end
 
   def find_product
