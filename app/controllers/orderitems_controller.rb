@@ -15,30 +15,29 @@ class OrderitemsController < ApplicationController
 
   def new
     @order_item = Orderitem.new(product_id: params[:product_id], quantity: 1)
-    @product_name = Product.find_by(id: params[:product_id]).name
   end
 
   def create
     order_id = get_order_id
 
     op = order_item_params
-    op[:order_id] = order_id
     op[:status] = "pending"
 
     order_item = Orderitem.new(op)
 
     is_successful = order_item.save
-
+    puts "order item #{order_item}"
     # test
-    existing_order = Order.find_by(id: order_id)
-    existing_product = Product.find_by(id: op[:product_id])
-
-    existing_order.orderitem_ids << order_item.id
-    existing_product.orderitem_ids << order_item.id
 
     if is_successful
       flash[:success] = "Order item added successfully"
       redirect_to order_orderitems_path(order_id)
+
+      existing_order = Order.find_by(id: op[:order_id])
+      existing_product = Product.find_by(id: op[:product_id])
+
+      existing_order.orderitem_ids << order_item.id
+      existing_product.orderitem_ids << order_item.id
     else
       order_item.errors.messages.each do |field, messages|
         flash.now[field] = messages
@@ -85,8 +84,8 @@ class OrderitemsController < ApplicationController
 
   def get_order_id
     if cookies[:order_id].nil?
-      new_order = Order.create(status: "pending")
-      cookies[:order_id] = new_order.id
+      #new_order = Order.create(status: "pending")
+      cookies[:order_id] = Order.create.id # new_order.id
       return cookies[:order_id]
     else
       return cookies[:order_id]

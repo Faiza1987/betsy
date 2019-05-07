@@ -47,7 +47,7 @@ describe OrderitemsController do
         post product_orderitems_path(products(:honk).id), params: test_input
       }.must_change "Orderitem.count", 1
 
-      new_orderitem = Orderitem.find_by(quantity: input_quantity, product_id: products(:chair).id)
+      new_orderitem = Orderitem.find_by(quantity: input_quantity, product_id: products(:honk).id)
 
       expect(new_orderitem).wont_be_nil
       expect(new_orderitem.quantity).must_equal input_quantity
@@ -68,7 +68,7 @@ describe OrderitemsController do
       }
 
       expect {
-        post orderitems_path, params: test_input
+        post product_orderitems_path(products(:chair).id), params: test_input
       }.wont_change "Orderitem.count"
 
       expect(flash[:quantity]).must_equal ["can't be blank"]
