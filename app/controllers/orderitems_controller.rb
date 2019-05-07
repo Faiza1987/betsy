@@ -22,6 +22,7 @@ class OrderitemsController < ApplicationController
 
     op = order_item_params
     op[:status] = "pending"
+    op[:order_id] = order_id
 
     order_item = Orderitem.new(op)
 
@@ -33,12 +34,6 @@ class OrderitemsController < ApplicationController
 
       existing_order.orderitem_ids << order_item.id
       existing_product.orderitem_ids << order_item.id
-
-      puts "existing order #{existing_order}"
-      puts "existing product #{existing_product}"
-      puts "order item #{order_item.id}"
-      puts "OI for Order #{existing_order.orderitem_ids}"
-      puts "OI for Product #{existing_product.orderitem_ids}"
 
       flash[:success] = "Order item added successfully"
       redirect_to order_orderitems_path(order_id)
@@ -88,8 +83,7 @@ class OrderitemsController < ApplicationController
 
   def get_order_id
     if cookies[:order_id].nil?
-      #new_order = Order.create(status: "pending")
-      cookies[:order_id] = Order.create.id # new_order.id
+      cookies[:order_id] = Order.create.id
       return cookies[:order_id]
     else
       return cookies[:order_id]
