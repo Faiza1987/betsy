@@ -47,21 +47,21 @@ describe OrdersController do
     end
 
     describe "update action" do
-      it "should change the order status from pending to paid, reduce product stock and clear all cookies" do
-        product = products(:chair)
+      let(:product) { products(:chair) }
 
+      it "should change the order status from pending to paid, reduce product stock and clear all cookies" do
         # try to place an order
         input_quantity = 3
         test_input = {
           "orderitem": {
             product_id: product.id,
             quantity: input_quantity,
-            order_id: cookies[:order_id],
           },
         }
 
         post product_orderitems_path(product.id), params: test_input
 
+        # find the order from cookies
         sample_order = Order.find_by(id: cookies[:order_id])
 
         current_stock = product.stock
