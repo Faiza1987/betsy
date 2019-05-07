@@ -35,5 +35,20 @@ describe ReviewsController do
                                                }
       }.wont_change "Review.count"
     end
+
+    it "does not allow user to review their own product" do
+      user = users(:amyw)
+      perform_login(user)
+      proc {
+        post product_reviews_path(product.id), params: {
+                                                 review: {
+                                                   rating: 5,
+                                                   description: "Best chair ever.",
+                                                 },
+                                               }
+      }.wont_change "Review.count"
+      must_respond_with :redirect
+      must_redirect_to product_path(product.id)
+    end
   end
 end

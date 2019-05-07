@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
 
     if @product.user_id == session[:user_id]
       flash[:warning] = "Cannot review own product."
-      redirect_to products_path
+      redirect_to product_path(@product.id)
     elsif @review.save
       redirect_to @product
     else
