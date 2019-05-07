@@ -23,10 +23,6 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create, :index]
   end
 
-  resources :orders do
-    resources :orderitems
-  end
-
   resources :products do
     resources :orderitems
   end

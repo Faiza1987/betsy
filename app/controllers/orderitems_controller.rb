@@ -18,13 +18,18 @@ class OrderitemsController < ApplicationController
   end
 
   def create
+    # redirect_to product_orderitems_path(params[:product_id])
     order_id = get_order_id
 
     # op = order_item_params
     # op[:status] = "pending"
     # op[:order_id] = order_id
 
-    order_item = Orderitem.new(status: "pending", order_id: order_id, product_id: params[:id])
+    order_item = Orderitem.new(status: "pending", order_id: order_id, product_id: params[:product_id], quantity: params[:quantity])
+
+    # order_item = Orderitem.new(adding_to_cart_params)
+    # order_item.status = "pending"
+    # order_item.order_id = order_id
 
     is_successful = order_item.save
 
@@ -36,13 +41,15 @@ class OrderitemsController < ApplicationController
       existing_product.orderitem_ids << order_item.id
 
       flash[:success] = "Order item added successfully"
-      redirect_to order_orderitems_path(order_id)
+      # Just a low-priority thought: Do we think we NEED to nest order items routes inside of order? Why not just order/show?
+      redirect_to order_path(order_id)
     else
       order_item.errors.messages.each do |field, messages|
         flash.now[field] = messages
       end
 
-      render :new, status: :bad_request
+      # This is showing the view at views/orderitems/_new.html.erb, if you want it from a different directory, there is a way to do this! Look it up :)
+      render :_new, status: :bad_request
     end
   end
 
@@ -93,4 +100,8 @@ class OrderitemsController < ApplicationController
   def order_item_params
     return params.require(:orderitem).permit(:quantity)
   end
+
+  # def adding_to_cart_params
+  #   return params.permit(:quantity, :product_id)
+  # end
 end
