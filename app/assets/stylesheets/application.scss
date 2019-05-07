@@ -23,16 +23,3 @@
 nav {
     background-color: aqua;
 }
-
-nav .container-fluid .navbar-brand {
-    font-style: italic;
-    float: left;
-}
-
-nav .container-fluid ul {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 10em;
-}

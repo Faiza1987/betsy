@@ -8,40 +8,41 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-
-  <nav>
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/homepage/index">Tricksy</a>
-    </div>
-    <ul>
-      <li class="nav-item"><%= link_to "Browse All Products", products_path %></li>
-      <li class="dropdown">
-        <span class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Browse Products by Category
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Clean</a>
-          <a class="dropdown-item" href="#">Edible</a>
-          <a class="dropdown-item" href="#">Messy</a>
-          <a class="dropdown-item" href="#">NSFW</a>
-          <a class="dropdown-item" href="#">SFW</a>
-        </div>
-      </span>
-      </li>
-      <% if session[:user_id] %>
-        <li class="nav-item"><%= link_to("Logged in as #{User.find(session[:user_id]).username}", current_user_path) %></li>
-        <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
-      <% else %>
-        <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
-      <% end %>
-      <li class="nav-item">
-        <%# <%= link_to "Shopping Cart", order_path(@order.id) %>  
-      </li>
-    </ul>
-  </div>
-  </nav>  
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <span class="navbar-brand" href="/homepage/index">Tricksy</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/products"> All Products </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              By Category
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Clead</a>
+              <a class="dropdown-item" href="#">Edible</a>
+              <a class="dropdown-item" href="#">Messy</a>
+              <a class="dropdown-item" href="#">NSFW</a>
+              <a class="dropdown-item" href="#">SFW</a>
+            </div>
+          </li>
+          <% if session[:user_id] %>
+            <li class="nav-item"><%= link_to("#{User.find(session[:user_id]).username}", current_user_path) %></li>
+            <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
+          <% end %>
+          <li class="nav-item">
+            <a class="nav-link" href="/order"> Shopping Cart </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <% if flash[:result_text] or flash[:messages] %>
       <section class="alert__container">
