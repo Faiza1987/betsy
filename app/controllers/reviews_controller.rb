@@ -13,26 +13,19 @@ class ReviewsController < ApplicationController
 
     if @product.user_id == session[:user_id]
       flash[:warning] = "Cannot review own product."
-      redirect_to products_path
+      redirect_to product_path(@product.id)
     elsif @review.save
       redirect_to @product
     else
       flash.now[:warning] = "Missing required field(s)."
       render :new
     end
-
-    def destroy
-      @review.destroy
-      respond_to do |format|
-        format.html { redirect_to products_path, notice: "Successfully deleted!" }
-      end
-    end
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:rating, :description)
+    params.require(:review).permit(:product_id, :rating, :description)
   end
 
   def logged_in?
