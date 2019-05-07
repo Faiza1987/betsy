@@ -31,10 +31,10 @@ class OrderitemsController < ApplicationController
 
     # test
     existing_order = Order.find_by(id: order_id)
-    existing_product = Product.find_by(id: order_item.product_id)
+    existing_product = Product.find_by(id: op[:product_id])
 
-    existing_order.orderitem_ids << order_item
-    existing_product.orderitem_ids << order_item
+    existing_order.orderitem_ids << order_item.id
+    existing_product.orderitem_ids << order_item.id
 
     if is_successful
       flash[:success] = "Order item added successfully"
@@ -49,6 +49,7 @@ class OrderitemsController < ApplicationController
   end
 
   def edit
+    @product_name = Product.find_by(id: params[:product_id]).name
   end
 
   def update
