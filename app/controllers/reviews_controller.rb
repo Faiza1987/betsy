@@ -20,13 +20,6 @@ class ReviewsController < ApplicationController
       flash.now[:warning] = "Missing required field(s)."
       render :new
     end
-
-    def destroy
-      @review.destroy
-      respond_to do |format|
-        format.html { redirect_to products_path, notice: "Successfully deleted!" }
-      end
-    end
   end
 
   private
