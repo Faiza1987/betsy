@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   # custom routes
-  
+
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create", as: "auth_callback"
 
