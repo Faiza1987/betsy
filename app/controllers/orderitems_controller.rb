@@ -20,17 +20,17 @@ class OrderitemsController < ApplicationController
   def create
     order_id = get_order_id
 
-    op = order_item_params
-    op[:status] = "pending"
-    op[:order_id] = order_id
+    # op = order_item_params
+    # op[:status] = "pending"
+    # op[:order_id] = order_id
 
-    order_item = Orderitem.new(op)
+    order_item = Orderitem.new(status: "pending", order_id: order_id, product_id: params[:id])
 
     is_successful = order_item.save
 
     if is_successful
-      existing_order = Order.find_by(id: op[:order_id])
-      existing_product = Product.find_by(id: op[:product_id])
+      existing_order = Order.find_by(id: order_item.order_id)
+      existing_product = Product.find_by(id: order_item.product_id)
 
       existing_order.orderitem_ids << order_item.id
       existing_product.orderitem_ids << order_item.id
@@ -91,6 +91,6 @@ class OrderitemsController < ApplicationController
   end
 
   def order_item_params
-    return params.require(:orderitem).permit(:quantity, :product_id, :order_id, :status)
+    return params.require(:orderitem).permit(:quantity)
   end
 end
