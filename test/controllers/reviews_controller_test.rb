@@ -24,5 +24,16 @@ describe ReviewsController do
       must_respond_with :redirect
       must_redirect_to product_path(product.id)
     end
+
+    it "does not create a new review for product given invalid data" do
+      proc {
+        post product_reviews_path(product.id), params: {
+                                                 review: {
+                                                   rating: "one",
+                                                   description: "Worst chair ever.",
+                                                 },
+                                               }
+      }.wont_change "Review.count"
+    end
   end
 end
