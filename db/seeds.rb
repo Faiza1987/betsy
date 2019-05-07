@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 users = [
-  ["laneia", "laneia@email.com"],
+  ["laneiam", "laneia@email.com"],
   ["faiza", "faiza@email.com"],
   ["amyw", "amy@email.com"],
   ["elise", "elise@email.com"],
