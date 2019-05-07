@@ -1,3 +1,32 @@
-<h2>
-  <h4> Welcome <%= @user.username %>! </h4>
-</h2>
+<section>
+  <h4>Welcome <%= @user.username %>!</h4>
+</section>
+
+<section>
+  <%= link_to "Add a new product", new_user_product_path(@user.id), method: :get %>
+</section>
+
+<section class="all-products">
+  <ul>
+  <% @user.products.each do |product| %>
+    <li>
+      <%= link_to product.name, user_product_path(@user.id, product.id), method: :get %>
+      <%= link_to "Edit", edit_user_product_path(@user.id, product.id), method: :get %>
+    </li>
+  <% end %>
+  </ul>
+</section>
+
+<section class="all-orders">
+  <ul>
+  <% @user.products.each do |product| %>
+    <% product.orderitem_ids.each do |id| %>
+      <% order = Order.find_by(id: Orderitem.find_by(id: id).order_id) %>
+      <li>
+        <%= order.id %>
+        <%= order.status %>
+      </li>
+    <% end %>
+  <% end %>
+  </ul>
+</section>

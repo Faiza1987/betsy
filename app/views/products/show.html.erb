@@ -1,30 +1,10 @@
-<h2><%= @product.name.upcase %></h2>
-
 <section>
-    <p><%= @product.category_id %></p>
-    <p>Stock: <%= @product.stock %></p>
-    <p>Price: <%= @product.price %></p>
-    <p>Rating: <%= @product.rating %></p>
-    <p><%= display_edit_product_button?(@product) %></p>
-    <p><%= display_delete_product_button?(@product) %></p>
+  <h2><%= @product.name.upcase %></h2>
 </section>
 
 <section>
-    <%= form_with model: @orderitem, :url =>  order_path(product_id:  @product.id)  do |f| %>
-    <%= f.label :stock %>
-    <%= f.select :stock, [*1..@product.stock] %>
-  <% end %>
+  <p>Stock: <%= @product.stock %></p>
+  <p>Price: <%= @product.price %></p>
+  <p><%= image_tag @product.photo_url %></p>
+  <p><%= render template: "orderitems/new" %></p>
 </section>
-
-<section>
-  <h3>Review Product</h3>
-  <%= form_with model: @review, :url => { :action => :review, :method => :post } do |f| %>
-    <%= f.label :rating %> <%= "\u{1F60D}:" %>
-    <%= f.select :rating, [*1..5] %>
-    <%= f.label :review %>:
-    <%= f.text_area :description %>
-    <%= f.submit "Submit" %>
-  <% end %>
-</section>
-
-<p><%= render partial: "review", collection: @product.reviews %></p>

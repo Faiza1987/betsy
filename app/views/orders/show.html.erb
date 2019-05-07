@@ -1,0 +1,17 @@
+<section>
+  <h3>Order</h3>
+</section>
+
+<section>
+  <ul>
+    <% @order.orderitem_ids.each do |id| %>
+      <% order_item = Orderitem.find_by(id: id)%>
+      <% product = Product.find_by(id: order_item.product_id) %>
+      <li>
+        <%= product.name %>
+        <%= product.price %>
+        <%= order_item.quantity %>
+      </li>
+    <% end %>
+  </ul>
+</section>
