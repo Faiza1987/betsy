@@ -38,7 +38,7 @@ class OrderitemsController < ApplicationController
 
     if is_successful
       flash[:success] = "Order item added successfully"
-      redirect_to product_path(order_item.product_id)
+      redirect_to order_orderitems_path(order_id)
     else
       order_item.errors.messages.each do |field, messages|
         flash.now[field] = messages
