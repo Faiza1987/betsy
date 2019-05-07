@@ -4,7 +4,7 @@ honk:
   name: some red honk
   price: 1000
   stock: 100
-  user: amyw
+  user: faiza
 
 chair:
   name: some brown chair
