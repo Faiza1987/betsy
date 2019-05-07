@@ -1,0 +1,13 @@
+<h1>Add item to cart</h1>
+
+<%= form_with model: @order_item do |f| %>
+  <%= f.hidden_field :product_id %>
+  
+  <%= f.label :product_id %>
+  <%= text_field_tag "product_name", @product_name, readonly: true%>
+
+  <%= f.label :quantity %>
+  <%= f.text_field :quantity %>
+
+  <%= f.submit "Add to Cart" %>
+<% end %>

@@ -14,7 +14,8 @@ class OrderitemsController < ApplicationController
   end
 
   def new
-    @order_item = Orderitem.new(quantity: 0)
+    @order_item = Orderitem.new(product_id: params[:product_id], quantity: 1)
+    @product_name = Product.find_by(id: params[:product_id]).name
   end
 
   def create
@@ -22,7 +23,7 @@ class OrderitemsController < ApplicationController
 
     op = order_item_params
     op[:order_id] = order_id
-    op[:product_id] = params[:product_id]
+    op[:status] = "pending"
 
     order_item = Orderitem.new(op)
 
@@ -30,12 +31,14 @@ class OrderitemsController < ApplicationController
 
     # test
     existing_order = Order.find_by(id: order_id)
+    existing_product = Product.find_by(id: order_item.product_id)
 
     existing_order.orderitem_ids << order_item
+    existing_product.orderitem_ids << order_item
 
     if is_successful
       flash[:success] = "Order item added successfully"
-      redirect_to orderitem_path(order_item.id)
+      redirect_to product_path(order_item.product_id)
     else
       order_item.errors.messages.each do |field, messages|
         flash.now[field] = messages
@@ -81,7 +84,8 @@ class OrderitemsController < ApplicationController
 
   def get_order_id
     if cookies[:order_id].nil?
-      cookies[:order_id] = Order.create.id
+      new_order = Order.create(status: "pending")
+      cookies[:order_id] = new_order.id
       return cookies[:order_id]
     else
       return cookies[:order_id]
@@ -89,6 +93,6 @@ class OrderitemsController < ApplicationController
   end
 
   def order_item_params
-    return params.require(:orderitem).permit(:quantity, :product_id, :order_id)
+    return params.require(:orderitem).permit(:quantity, :product_id, :order_id, :status)
   end
 end
