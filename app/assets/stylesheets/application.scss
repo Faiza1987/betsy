@@ -12,7 +12,19 @@
  *
  */
 
+
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
+
 @import "bootstrap";
+
 /* Import scss content */
+
 @import "**/*";
+.navbar {
+    background-color: aqua;
+}
+
+.navbar .container-fluid ul {
+    display: flex;
+    flex-direction: row;
+}

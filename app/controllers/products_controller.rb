@@ -1,16 +1,9 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :product_merchant?, only: [:edit, :destroy]
+  before_action :require_login, only: [:new, :create, :edit, :update]
 
   def index
-    if params[:category_id]
-      @title = "#{params[:category_id].upcase}"
-      @products = Product.where(:category_id => params[:category_id])
-      @products = @products.order(:name)
-    else
-      @title = "All Products"
-      @products = Product.all.order(:name)
-    end
+    @products = Product.all
   end
 
   def new
@@ -25,18 +18,31 @@ class ProductsController < ApplicationController
       flash[:success] = "Product added!"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Failed to add product, check product data."
+      @product.errors.messages.each do |field, message|
+        flash.now[field] = message
+      end
+
       render :new, status: :bad_request
     end
   end
 
   def show
-    @orderitem = OrderItem.new
+    if @product.nil?
+      flash[:error] = "Unknown product"
+      redirect_to products_path
+    end
   end
 
   def edit
-    unless product_merchant?
-      redirect_to products_path, :alert => "Must be product merchant."
+    @product = Product.find_by(id: params[:id])
+
+    if @product.nil?
+      flash[:error] = "Unknown product"
+      return redirect_to products_path
+    end
+
+    if session[:user_id] != @product.user_id
+      redirect_to product_path(params[:id]), :alert => "Must be the merchant of this product to edit."
     end
   end
 
@@ -45,36 +51,38 @@ class ProductsController < ApplicationController
       flash[:success] = "Update successful!"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Update failed, please check product data."
+      @product.errors.messages.each do |field, message|
+        flash.now[field] = message
+      end
       render :edit, status: :bad_request
     end
   end
 
   def destroy
-    if product_merchant?
-      if @product.destroy
-        flash[:status] = :success
-        flash[:success] = "Succesfully deleted!"
-        redirect_to products_path
-      end
-    else
-      redirect_to products_path, :alert => "Must be product merchant."
+    @product = Product.find_by(id: params[:id])
+
+    if @product.nil?
+      flash[:error] = "Unknown product"
+      return redirect_to products_path
+    end
+
+    if session[:user_id] != @product.user_id
+      return redirect_to product_path(params[:id]), :alert => "Must be the merchant of this product to edit."
+    end
+
+    if @product.destroy
+      flash[:success] = "Succesfully deleted!"
+      redirect_to products_path
     end
   end
 
   private
 
   def product_params
-    return params.require(:product).permit(:name, :category_id, :price, :stock, :user_id, orderitem_ids: [])
-  end
-
-  def product_merchant?
-    @user = User.find_by(id: session[:user_id])
-    @user == @product.user
+    return params.require(:product).permit(:name, :price, :stock, :user_id, category_ids: [], orderitem_ids: [])
   end
 
   def find_product
     @product = Product.find_by(id: params[:id])
-    head :not_found unless @product
   end
 end
