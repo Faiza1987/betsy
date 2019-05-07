@@ -26,20 +26,22 @@ class OrderitemsController < ApplicationController
     order_item = Orderitem.new(op)
 
     is_successful = order_item.save
-    puts "order item #{order_item}"
 
     if is_successful
+      existing_order = Order.find_by(id: op[:order_id])
+      existing_product = Product.find_by(id: op[:product_id])
+
+      existing_order.orderitem_ids << order_item.id
+      existing_product.orderitem_ids << order_item.id
+
+      puts "existing order #{existing_order}"
+      puts "existing product #{existing_product}"
+      puts "order item #{order_item.id}"
+      puts "OI for Order #{existing_order.orderitem_ids}"
+      puts "OI for Product #{existing_product.orderitem_ids}"
+
       flash[:success] = "Order item added successfully"
       redirect_to order_orderitems_path(order_id)
-
-      # existing_order = Order.find_by(id: op[:order_id])
-      # existing_product = Product.find_by(id: op[:product_id])
-
-      # puts "existing order #{existing_order}"
-      # puts "existing product #{existing_product}"
-      # puts "order item #{order_item.id}"
-      # puts "OI for Order #{existing_order.orderitem_ids}"
-      # puts "OI for Product #{existing_product.orderitem_ids}"
     else
       order_item.errors.messages.each do |field, messages|
         flash.now[field] = messages
