@@ -1,0 +1,14 @@
+<h1>Review Product</h1>
+
+<%= form_for @review, url: product_reviews_path(params[:product_id]) do |f| %>
+
+  <strong>Product:</strong> <%= @review.product.name %>
+
+  <%= f.label :rating, "Rating" %>
+  <%= f.select :rating, (1..5).to_a %>
+
+  <%= f.label :description, "Details" %>
+  <%= f.text_area :description, placeholder: "Write your review here." %>
+
+  <%= f.submit "Submit" %>
+<% end %>
