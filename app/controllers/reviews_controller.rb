@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :description)
+    params.require(:review).permit(:product_id, :rating, :description)
   end
 
   def logged_in?
