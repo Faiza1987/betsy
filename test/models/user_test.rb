@@ -8,8 +8,6 @@ describe User do
   end
 
   it "must have a valid user" do
-    user = users(:faiza)
-
     valid_user = user.valid?
     expect(valid_user).must_equal true
   end
