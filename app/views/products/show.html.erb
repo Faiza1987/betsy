@@ -5,5 +5,5 @@
 <section>
   <p>Stock: <%= @product.stock %></p>
   <p>Price: <%= @product.price %></p>
-  <p><%= button_to "Add item to cart", new_orderitem_path, method: :get %></p>
+  <p><%= button_to "Add item to cart", new_product_orderitem_path(product_id: @product.id), method: :get %></p>
 </section>

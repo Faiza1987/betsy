@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe Orderitem do
-  let(:orderitem) { Orderitem.new }
+  let(:orderitem) { orderitems(:one) }
 
   it "must be valid" do
     value(orderitem).must_be :valid?
