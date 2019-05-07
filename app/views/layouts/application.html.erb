@@ -15,7 +15,8 @@
         <li> <%= link_to "Home", root_path %></li>
         <% if session[:user_id] %>
           <li><%= link_to("Logged in as #{User.find(session[:user_id]).username}", current_user_path) %></li>
-          <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+          <li><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
+          <li><%= link_to "Add a new product", new_product_path, method: :get%></li>
         <% else %>
           <li><%= link_to "Log In", github_login_path %></li>
         <% end %>
