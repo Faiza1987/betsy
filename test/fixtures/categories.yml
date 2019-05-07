@@ -1,7 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+nsfw:
+  name: NSFW
 
-two:
-  name: MyString
+sfw:
+  name: SFW
+
+clean:
+  name: Clean
+
+messy:
+  name: Messy
+
+edible:
+  name: Edible

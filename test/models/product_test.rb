@@ -66,4 +66,32 @@ describe Product do
       expect(product.errors.messages[:stock]).must_include "must be greater than or equal to 0"
     end
   end
+
+  describe "relationships" do
+    it "must respond to user" do
+      expect(product).must_respond_to :user
+    end
+
+    it "must respond to reviews" do
+      expect(product).must_respond_to :reviews
+    end
+
+    it "must respond to categories" do
+      expect(product).must_respond_to :categories
+    end
+
+    it "must respond to orderitems" do
+      expect(product).must_respond_to :orderitems
+    end
+
+    it "must respond to orders" do
+      expect(product).must_respond_to :orders
+    end
+  end
+
+  describe "custom methods" do
+    it "will get an average rating for products" do
+
+    end
+  end
 end
