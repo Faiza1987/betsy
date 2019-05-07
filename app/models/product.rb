@@ -12,7 +12,7 @@ class Product < ApplicationRecord
   scope :category, ->(category) { where category: category }
   scope :user, ->(user) { where user: user }
 
-  def average_rating
+  def self.average_rating
     num_ratings = self.reviews.count
     return 0 if num_ratings == 0
 
