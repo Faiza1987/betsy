@@ -10,22 +10,41 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li> <%= link_to "Home", root_path %></li>
-        <% if session[:user_id] %>
-          <li><%= link_to("Logged in as #{User.find(session[:user_id]).username}", current_user_path) %></li>
-          <li><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
-          <li><%= link_to "Add a new product", new_product_path, method: :get%></li>
-        <% else %>
-          <li><%= link_to "Log In", github_login_path %></li>
-        <% end %>
-        
-        <li> <%= link_to "Browse All Products", products_path %> </li>
-        <li> Browse Products by Category </li>
-        <li> Shopping Cart </li>
-      </ul>
-    </nav>
+
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/homepage/index">Tricksy</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <% if session[:user_id] %>
+        <li class="nav-item"><%= link_to("Logged in as #{User.find(session[:user_id]).username}", current_user_path) %></li>
+        <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
+      <% else %>
+        <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
+      <% end %>
+      <li class="nav-item"><%= link_to "Browse All Products", products_path %></li>
+      <span class="nav-link">
+      <li class="nav-item dropdown">
+        <span class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Browse Products by Category
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Clean</a>
+          <a class="dropdown-item" href="#">Edible</a>
+          <a class="dropdown-item" href="#">Messy</a>
+          <a class="dropdown-item" href="#">NSFW</a>
+          <a class="dropdown-item" href="#">SFW</a>
+        </div>
+      </li>
+      </span>
+      <span class="nav-link">
+        <li class="nav-item">
+          Shopping Cart
+        </li>
+      </span>
+    </ul>
+  </div>
+  </nav>  
 
     <% if flash[:result_text] or flash[:messages] %>
       <section class="alert__container">

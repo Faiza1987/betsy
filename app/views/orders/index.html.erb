@@ -1,0 +1,17 @@
+ <% if flash.count > 0 %>
+      <section class="alert-container">
+        <% flash.each do |name, message| %>
+          <% if message.class == Array %>
+            <ul class="alert-list">
+            <% message.each do |msg| %>
+              <li>
+                <div class="alert alert-warning" role="alert"><%= name %>: <%= msg %></div>
+              </li>
+            <% end %>
+          <% else %>
+            <div class="alert alert-success" role="alert"><%= message %></div>
+          <% end %>
+          </ul>
+        <% end %>
+      </section>
+    <% end %>
