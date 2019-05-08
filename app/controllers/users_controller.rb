@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   # skip_before_action :require_login, only: [:create]
 
@@ -7,15 +9,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    if @user.nil?
-      head :not_found
+    head :not_found if @user.nil?
+
+    if Product.find_by(user_id: @user.id).nil?
+      flash[:result_text] = 'This merchant does not have any products'
     end
   end
 
   def create
-    auth_hash = request.env["omniauth.auth"]
+    auth_hash = request.env['omniauth.auth']
 
-    user = User.find_by(uid: auth_hash[:uid], provider: "github")
+    user = User.find_by(uid: auth_hash[:uid], provider: 'github')
 
     if user
       flash[:status] = :success
@@ -33,13 +37,13 @@ class UsersController < ApplicationController
     end
 
     session[:user_id] = user.id
-    return redirect_to root_path
+    redirect_to root_path
   end
 
   def current
     @user = User.find_by(id: session[:user_id])
     if @user.nil?
-      flash[:error] = "You must log in first!"
+      flash[:error] = 'You must log in first!'
       redirect_to root_path
     end
   end
@@ -47,11 +51,8 @@ class UsersController < ApplicationController
   def destroy
     session[:user_id] = nil
     flash[:status] = :success
-    flash[:result_text] = "Successfully logged out"
+    flash[:result_text] = 'Successfully logged out'
 
     redirect_to root_path
   end
-
-
-
 end # class end

@@ -1,5 +1,23 @@
-<h2>User Summary: <%= @user.username %> </h2>
-<p> Became a merchant: <%= render_date @user.created_at %></p>
+<section>
+  <h2>User Summary: <%= @user.username %> </h2>
+  <p> Became a merchant: <%= render_date @user.created_at %></p>
+</section>
 
-<%= link_to "Home", root_path %>
+<section>
+  <% product = Product.find_by(user_id: @user.id) %>
+  <% if product %>
+    <p>Stock: <%= product.stock %></p>
+    <p>Price: <%= product.price %></p>
+    <p><%= image_tag(product.photo_url, :size => "300x300") %></p>
+    <p>Description: <%= product.description %></p>
+    <p>Categories: <%# @product.category_ids.each do |category| %> 
+      <%#= link_to category.name, category_products_path(category.id)  %>
+    <%# end %></p>
+    <p><%= render template: "orderitems/_new" %></p>
+  <% end %>
+</section>
 
+
+<section>
+  <%= link_to "Home", root_path %>
+</section>
