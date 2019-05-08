@@ -12,3 +12,27 @@
   <% end %></p>
   <p><%= render template: "orderitems/new" %></p>
 </section>
+
+<section>
+    <h3>Reviews</h3>
+    <p> Average rating:
+      <% if @product.reviews.count == 0 %>
+          No Reviews
+      <%else%>
+        <%= @product.average_rating.round(1) %>
+      <%end%> </p>
+    <section>
+      <% if @current_merchant != @product.merchant %>
+        <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
+      <% end %>
+    </section>
+  <ul>
+    <% @product.reviews.each do |review| %>
+    <p>
+      <li> Rating: <%= review.rating %> </li>
+      <li>
+        <%= review.description %> </li>
+      </p>
+      <% end %>
+    </ul>
+  </section>
