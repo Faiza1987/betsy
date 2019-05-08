@@ -16,7 +16,7 @@ class Product < ApplicationRecord
     num_ratings = self.reviews.count
     return 0 if num_ratings == 0
 
-    total = 0
+    total = 0.0
     self.reviews.each do |review|
       total += review.rating
     end

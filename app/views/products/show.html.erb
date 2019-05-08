@@ -7,8 +7,8 @@
   <p>Price: <%= @product.price %></p>
   <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
   <p>Description: <%=@product.description %></p>
-  <p>Categories: <%# @product.category_id.each do |category| %> 
-    <%#= link_to category.category_id, category_products_path(category.id)  %>
+  <p>Categories: <%# @product.category_ids.each do |category| %> 
+    <%#= link_to category.name, category_products_path(category.id)  %>
   <%# end %></p>
   <p><%= render template: "orderitems/new" %></p>
 </section>
