@@ -63,7 +63,7 @@ Product.create!(name: "Forbidden Lollipops",
                 price: 5,
                 stock: 200,
                 description: "Hand dipped in the finest fruity wax candles.",
-                photo_url: "https://i.imgur.com/N0Gyp1f.jpg",
+                photo_url: "https://i.imgur.com/8o9Deye.png",
                 user_id: rand(1..5),
                 category_ids: [2])
 
