@@ -36,11 +36,8 @@ describe OrderitemsController do
     it "will save a new order item and redirect if given valid inputs" do
       input_quantity = 3
       test_input = {
-        "orderitem": {
-          quantity: input_quantity,
-          product_id: products(:honk).id,
-        # order_id: orders(:one).id,
-        },
+        quantity: input_quantity,
+        product_id: products(:honk).id,
       }
 
       expect {
