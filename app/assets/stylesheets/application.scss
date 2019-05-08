@@ -20,11 +20,6 @@
 /* Import scss content */
 
 @import "**/*";
-.navbar {
+nav {
     background-color: aqua;
-}
-
-.navbar .container-fluid ul {
-    display: flex;
-    flex-direction: row;
 }
