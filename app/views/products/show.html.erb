@@ -7,9 +7,9 @@
   <p>Price: <%= @product.price %></p>
   <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
   <p>Description: <%=@product.description %></p>
-  <p>Categories: <% @product.category_ids.each do |category| %> 
-    <%= link_to category.category_ids, category_products_path(category.id)  %>
-  <% end %></p>
+  <p>Categories: <%# @product.category_id.each do |category| %> 
+    <%#= link_to category.category_id, category_products_path(category.id)  %>
+  <%# end %></p>
   <p><%= render template: "orderitems/new" %></p>
 </section>
 
@@ -19,10 +19,10 @@
       <% if @product.reviews.count == 0 %>
           No Reviews
       <%else%>
-        <%= @product.average_rating.round(1) %>
+        <%#= @product.average_rating.round(1) %>
       <%end%> </p>
     <section>
-      <% if @current_merchant != @product.merchant %>
+      <% if @user != @product.user %>
         <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
       <% end %>
     </section>
