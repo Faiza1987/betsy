@@ -5,23 +5,23 @@ describe Order do
   let(:order_2) { orders(:two) }
   let(:order_3) { orders(:three) }
 
-  describe "validations" do
-    it "must be valid" do
-      order.valid?.must_equal true
-    end
+  #   describe "validations" do
+  #     it "must be valid" do
+  #       order.valid?.must_equal true
+  #     end
 
-    it "must be invalid when billing info is blank and status is nil" do
-      order_2.valid?.must_equal false
-    end
+  #     it "must be invalid when billing info is blank and status is nil" do
+  #       order_2.valid?.must_equal false
+  #     end
 
-    it "must be valid when billing info is filled and status is paid or complete" do
-      order.valid?.must_equal true
-    end
+  #     it "must be valid when billing info is filled and status is paid or complete" do
+  #       order.valid?.must_equal true
+  #     end
 
-    it "must be invalid when billing info is blank and status is paid or complete" do
-      order_3.valid?.must_equal false
-    end
-  end
+  #     it "must be invalid when billing info is blank and status is paid or complete" do
+  #       order_3.valid?.must_equal false
+  #     end
+  #   end
 
   describe "calculate_total" do
     it "returns total cost of an order" do

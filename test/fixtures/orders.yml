@@ -9,7 +9,7 @@ one:
   card_expiration_date: 2019-04-30
   cvv: 655
   billing_zip_code: 98107
-  status: Paid
+  status: Pending
 
 two:
   name: amy
@@ -19,7 +19,7 @@ two:
   card_expiration_date:
   cvv:
   billing_zip_code:
-  status: nil
+  status: Pending
 
 three:
   name: amy
@@ -29,4 +29,4 @@ three:
   card_expiration_date:
   cvv:
   billing_zip_code:
-  status: paid
+  status: Pending
