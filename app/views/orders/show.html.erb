@@ -10,10 +10,18 @@
       <li>
         <%= product.name %>
         <%= product.price %>
-        <%= order_item.quantity %>
-        <%= link_to "Edit", edit_orderitem_path(id) %>
-        <%= link_to "Delete", orderitem_path(id), method: :delete %>
+        <%= order_item.quantity %> 
+        <% if cookies[:order_id] %>
+          <%= link_to "Edit", edit_orderitem_path(id) %>
+          <%= link_to "Delete", orderitem_path(id), method: :delete %>
+        <% end %>    
       </li>
     <% end %>
   </ul>
+</section>
+
+<section>
+  <% if cookies[:order_id] %>
+    <%= button_to "Check Out", edit_order_path(params[:id]), method: :get %>
+  <% end %>
 </section>
