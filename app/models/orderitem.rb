@@ -5,11 +5,18 @@ class Orderitem < ApplicationRecord
   validates :quantity, presence: true, numericality: { :only_integer => true, :greater_than_or_equal_to => 1 }
   validate :quantity_greater_than_stock
 
-  def quantity_greater_than_stock
-    return !self.quantity.nil? && self.quantity > Product.find_by(id: product_id).stock
+  def is_quantity_valid?
+    return quantity_greater_than_stock
   end
 
   def calculate_cost
     self.product.price * self.quantity
+  end
+
+  private
+
+  # custom validation
+  def quantity_greater_than_stock
+    return !self.quantity.nil? && self.quantity > Product.find_by(id: product_id).stock
   end
 end

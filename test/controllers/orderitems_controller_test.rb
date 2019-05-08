@@ -27,7 +27,7 @@ describe OrderitemsController do
       must_respond_with :redirect
     end
 
-    it "will give a 400 error with invalid params" do
+    it "will redirect to the product show page when given invalid params" do
       input_quantity = ""
       test_input = {
         "orderitem": {
@@ -42,7 +42,7 @@ describe OrderitemsController do
       }.wont_change "Orderitem.count"
 
       expect(flash[:quantity]).must_equal ["can't be blank", "is not a number"]
-      must_respond_with :bad_request
+      must_respond_with :redirect
     end
   end
 

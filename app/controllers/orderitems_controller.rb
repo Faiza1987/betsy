@@ -10,10 +10,7 @@ class OrderitemsController < ApplicationController
 
     order_item = Orderitem.new(status: "pending", order_id: order_id, product_id: params[:product_id], quantity: params[:quantity])
 
-    # is_successful = order_item.save
-    # puts "order item #{order_item.errors.messages}"
-    # puts "is successful #{is_successful}"
-    if order_item.quantity_greater_than_stock
+    if order_item.is_quantity_valid?
       flash[:status] = "failure"
       flash[:result_text] = "Can't be greater than total stock for product"
       return redirect_back(fallback_location: product_path(order_item.product_id))
@@ -28,6 +25,12 @@ class OrderitemsController < ApplicationController
       flash[:result_text] = "Order item added successfully"
 
       redirect_to order_path(order_id)
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Cannot create order item"
+      flash[:messages] = order_item.errors.messages
+
+      redirect_back(fallback_location: product_path(order_item.product_id))
     end
   end
 
