@@ -34,7 +34,13 @@ describe Orderitem do
   end
 
   describe "custom methods" do
-    it "will validate quantity is less than stock" do
+    it "will return false if quantity is less than stock" do
+    end
+
+    it "will return false if quantity is equal to stock" do
+    end
+
+    it "will return true if quantity larger than stock" do
     end
   end
 end
