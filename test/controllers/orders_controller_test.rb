@@ -86,7 +86,7 @@ describe OrdersController do
 
         expect(product.stock).must_equal remaining_stock
         expect(sample_order.status).must_equal "Paid"
-        expect(flash[:success]).must_equal "Order was placed successully"
+        expect(flash[:result_text]).must_equal "Order was placed successully"
         expect(cookies[:order_id]).must_equal ""
 
         must_respond_with :redirect

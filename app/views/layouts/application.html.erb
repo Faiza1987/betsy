@@ -38,7 +38,11 @@
             <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link"><%# link_to "Shopping Cart", order_path(cookies[:order_id]) %>  </a>
+            <% if cookies[:order_id] %>
+              <a class="nav-link"><%= link_to "Shopping Cart", order_path(cookies[:order_id]) %> </a>
+            <% else %>
+              <a class="nav-link"><%= link_to "Shopping Cart" %> </a>
+            <% end %>
           </li>
         </ul>
       </div>
