@@ -1,37 +1,6 @@
 require "test_helper"
 
 describe OrderitemsController do
-  # describe "index" do
-  #   it "should get index" do
-  #     get orderitems_path
-
-  #     must_respond_with :success
-  #   end
-  # end
-
-  # describe "show" do
-  #   it "should be OK to show an existing, valid order item" do
-  #     valid_orderitem_id = orderitems(:trick).id
-
-  #     get orderitem_path(valid_orderitem_id)
-
-  #     must_respond_with :success
-  #   end
-
-  #   it "should give a flash notice instead of showing a non-existant, invalid order item" do
-  #     order_item = orderitems(:treat)
-  #     invalid_orderitem_id = order_item.id
-  #     order_item.destroy
-
-  #     # Act
-  #     get orderitem_path(invalid_orderitem_id)
-
-  #     # Assert
-  #     must_respond_with :redirect
-  #     expect(flash[:error]).must_equal "Unknown order item"
-  #   end
-  # end
-
   describe "create" do
     it "will save a new order item and redirect if given valid inputs" do
       input_quantity = 3
@@ -52,6 +21,8 @@ describe OrderitemsController do
       expect(new_orderitem.product_id).must_equal products(:honk).id
       expect(new_orderitem.order_id).must_equal cookies[:order_id].to_i
       expect(new_orderitem.status).must_equal input_status
+
+      expect(flash[:result_text]).must_equal "Order item added successfully"
 
       must_respond_with :redirect
     end

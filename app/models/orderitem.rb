@@ -6,9 +6,7 @@ class Orderitem < ApplicationRecord
   validate :quantity_greater_than_stock
 
   def quantity_greater_than_stock
-    if !quantity.nil? && quantity > Product.find_by(id: product_id).stock
-      errors.add(:quantity, "can't be greater than total stock for product")
-    end
+    return !self.quantity.nil? && self.quantity > Product.find_by(id: product_id).stock
   end
 
   def calculate_cost
