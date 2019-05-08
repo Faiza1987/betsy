@@ -2,10 +2,5 @@
 
 one:
   rating: 1
-  description: MyString
-  product_id: 2
-
-two:
-  rating: 1
-  description: MyString
-  product_id: 3
+  description: "MyString"
+  product: chair

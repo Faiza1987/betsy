@@ -1,5 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 trick:
   quantity: 1
   order: one
