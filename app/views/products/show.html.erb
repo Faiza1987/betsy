@@ -5,10 +5,10 @@
 <section>
   <p>Stock: <%= @product.stock %></p>
   <p>Price: <%= @product.price %></p>
-  <p><%= image_tag @product.photo_url :size => "300x300", alt:"#{@product.name}"%></p>
+  <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
   <p>Description: <%=@product.description %></p>
   <p>Categories: <% @product.category_ids.each do |category| %> 
-    <%= link_to category.category_name, category_products_path(category.id)  %>
+    <%= link_to category.category_ids, category_products_path(category.id)  %>
   <% end %></p>
   <p><%= render template: "orderitems/new" %></p>
 </section>
