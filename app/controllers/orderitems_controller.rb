@@ -1,17 +1,17 @@
 class OrderitemsController < ApplicationController
   before_action :find_individual_order_item, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @order_items = Orderitem.all
-  end
+  # def index
+  #   @order_items = Orderitem.all
+  # end
 
-  def show
-    if @order_item.nil?
-      flash[:error] = "Unknown order item"
+  # def show
+  #   if @order_item.nil?
+  #     flash[:error] = "Unknown order item"
 
-      redirect_to root_path
-    end
-  end
+  #     redirect_to root_path
+  #   end
+  # end
 
   def new
     @order_item = Orderitem.new(product_id: params[:product_id], quantity: 1)
@@ -54,7 +54,7 @@ class OrderitemsController < ApplicationController
   end
 
   def edit
-    @product_name = Product.find_by(id: params[:product_id]).name
+    @product_name = Product.find_by(id: @order_item.product_id).name
   end
 
   def update
@@ -62,7 +62,7 @@ class OrderitemsController < ApplicationController
 
     if is_successful
       flash[:success] = "order item updated successfully"
-      redirect_to root_path
+      redirect_to order_path(@order_item.order_id)
     else
       @order_item.errors.messages.each do |field, messages|
         flash.now[field] = messages
@@ -78,7 +78,7 @@ class OrderitemsController < ApplicationController
     else
       @order_item.destroy
       flash[:success] = "Order item ID #{@order_item.id} deleted"
-      redirect_to order_path
+      redirect_to order_path(@order_item.order_id)
     end
   end
 
