@@ -53,7 +53,7 @@ class OrderitemsController < ApplicationController
     else
       flash.now[:status] = :failure
       flash.now[:result_text] = "Cannot create order item"
-      flash.now[:messages] = order_item.errors.messages
+      flash.now[:messages] = @order_item.errors.messages
       render :edit, status: :bad_request
     end
   end
