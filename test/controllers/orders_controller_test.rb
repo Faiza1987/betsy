@@ -53,10 +53,8 @@ describe OrdersController do
         # try to place an order
         input_quantity = 3
         test_input = {
-          "orderitem": {
-            product_id: product.id,
-            quantity: input_quantity,
-          },
+          product_id: product.id,
+          quantity: input_quantity,
         }
 
         post product_orderitems_path(product.id), params: test_input
