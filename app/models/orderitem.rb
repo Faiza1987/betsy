@@ -10,4 +10,8 @@ class Orderitem < ApplicationRecord
       errors.add(:quantity, "can't be greater than total stock for product")
     end
   end
+
+  def calculate_cost
+    self.product.price * self.quantity
+  end
 end

@@ -1,0 +1,31 @@
+<section>
+  <h3>Please fill in your information below</h3>
+</section>
+
+<section>
+  <%= form_with model: @order, url: order_path(cookies[:order_id]), method: :patch do |f| %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+
+    <%= f.label :mailing_address %>
+    <%= f.text_field :mailing_address %>
+
+    <%= f.label :credit_card_num %>
+    <%= f.text_field :credit_card_num %>
+
+    <%= f.label :card_expiration_date %>
+    <%= f.text_field :card_expiration_date %>
+
+    <%= f.label :cvv %>
+    <%= f.text_field :cvv %>
+
+    <%= f.label :billing_zip_code %>
+    <%= f.text_field :billing_zip_code %>
+
+    <%= f.submit "Place Order" %>
+  <% end %>
+</section>

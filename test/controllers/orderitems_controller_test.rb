@@ -39,8 +39,6 @@ describe OrderitemsController do
       test_input = {
         quantity: input_quantity,
         product_id: products(:honk).id,
-      # order_id: orders(:one).id,
-      # status: input_status,
       }
 
       expect {

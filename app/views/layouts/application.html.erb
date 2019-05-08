@@ -10,7 +10,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light">
-      <span class="navbar-brand" href="/homepage/index">Tricksy</span>
+      <span class="navbar-brand"> <%= link_to "Tricksy", root_path %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,7 +24,7 @@
               By Category
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Clead</a>
+              <a class="dropdown-item" href="#">Clean</a>
               <a class="dropdown-item" href="#">Edible</a>
               <a class="dropdown-item" href="#">Messy</a>
               <a class="dropdown-item" href="#">NSFW</a>
@@ -38,7 +38,11 @@
             <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link"><%# link_to "Shopping Cart", order_path(cookies[:order_id]) %>  </a>
+            <% if cookies[:order_id] %>
+              <a class="nav-link"><%= link_to "Shopping Cart", order_path(cookies[:order_id]) %> </a>
+            <% else %>
+              <a class="nav-link"><%= link_to "Shopping Cart" %> </a>
+            <% end %>
           </li>
         </ul>
       </div>

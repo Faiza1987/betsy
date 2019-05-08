@@ -5,6 +5,34 @@
 <section>
   <p>Stock: <%= @product.stock %></p>
   <p>Price: <%= @product.price %></p>
-  <p><%= image_tag @product.photo_url %></p>
-  <p><%= render "orderitems/new" %></p>
+  <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
+  <p>Description: <%=@product.description %></p>
+  <p>Categories: <%# @product.category_ids.each do |category| %> 
+    <%#= link_to category.name, category_products_path(category.id)  %>
+  <%# end %></p>
+  <p><%= render template: "orderitems/_new" %></p>
 </section>
+
+<section>
+    <h3>Reviews</h3>
+    <p> Average rating:
+      <% if @product.reviews.count == 0 %>
+          No Reviews
+      <%else%>
+        <%= @product.average_rating.round(1) %>
+      <%end%> </p>
+    <section>
+      <% if @user != @product.user %>
+        <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
+      <% end %>
+    </section>
+  <ul>
+    <% @product.reviews.each do |review| %>
+    <p>
+      <li> Rating: <%= review.rating %> </li>
+      <li>
+        <%= review.description %> </li>
+      </p>
+      <% end %>
+    </ul>
+  </section>
