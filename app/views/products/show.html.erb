@@ -19,7 +19,7 @@
       <% if @product.reviews.count == 0 %>
           No Reviews
       <%else%>
-        <%#= @product.average_rating.round(1) %>
+        <%= @product.average_rating.round(1) %>
       <%end%> </p>
     <section>
       <% if @user != @product.user %>
