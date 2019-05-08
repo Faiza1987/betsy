@@ -71,7 +71,7 @@ describe OrderitemsController do
         post product_orderitems_path(products(:chair).id), params: test_input
       }.wont_change "Orderitem.count"
 
-      expect(flash[:quantity]).must_equal ["can't be blank"]
+      expect(flash[:quantity]).must_equal ["can't be blank", "is not a number"]
       must_respond_with :bad_request
     end
   end
