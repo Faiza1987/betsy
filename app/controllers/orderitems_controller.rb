@@ -39,15 +39,21 @@ class OrderitemsController < ApplicationController
   end
 
   def update
-    is_successful = @order_item.update(order_item_params)
+    if params[:orderitem][:quantity].to_i > Product.find_by(id: @order_item.product_id).stock
+      flash[:status] = :failure
+      flash[:result_text] = "Can't be greater than total stock for product"
+      redirect_back(fallback_location: root_path)
+      return
+    end
 
+    is_successful = @order_item.update(order_item_params)
     if is_successful
       flash[:success] = "order item updated successfully"
-      redirect_to order_path(@order_item.order_id)
+      return redirect_to order_path(@order_item.order_id)
     else
-      @order_item.errors.messages.each do |field, messages|
-        flash.now[field] = messages
-      end
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Cannot create order item"
+      flash.now[:messages] = order_item.errors.messages
       render :edit, status: :bad_request
     end
   end
