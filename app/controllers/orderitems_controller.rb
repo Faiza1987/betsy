@@ -32,7 +32,8 @@ class OrderitemsController < ApplicationController
     # order_item.order_id = order_id
 
     is_successful = order_item.save
-
+    puts "order item #{order_item.errors.messages}"
+    puts "is successful #{is_successful}"
     if is_successful
       existing_order = Order.find_by(id: order_item.order_id)
       existing_product = Product.find_by(id: order_item.product_id)

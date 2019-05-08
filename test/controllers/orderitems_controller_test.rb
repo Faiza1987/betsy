@@ -35,12 +35,12 @@ describe OrderitemsController do
   describe "create" do
     it "will save a new order item and redirect if given valid inputs" do
       input_quantity = 3
+      input_status = "pending"
       test_input = {
-        "orderitem": {
-          quantity: input_quantity,
-          product_id: products(:honk).id,
-        # order_id: orders(:one).id,
-        },
+        quantity: input_quantity,
+        product_id: products(:honk).id,
+      # order_id: orders(:one).id,
+      # status: input_status,
       }
 
       expect {
@@ -53,6 +53,7 @@ describe OrderitemsController do
       expect(new_orderitem.quantity).must_equal input_quantity
       expect(new_orderitem.product_id).must_equal products(:honk).id
       expect(new_orderitem.order_id).must_equal cookies[:order_id].to_i
+      expect(new_orderitem.status).must_equal input_status
 
       must_respond_with :redirect
     end
