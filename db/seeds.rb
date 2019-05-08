@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -7,71 +9,71 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 users = [
-  ["laneiam", "laneia@email.com"],
-  ["faiza", "faiza@email.com"],
-  ["amyw", "amy@email.com"],
-  ["elise", "elise@email.com"],
-  ["tildee", "tildee@email.com"],
+  ['laneiam', 'laneia@email.com'],
+  ['faiza', 'faiza@email.com'],
+  ['amyw', 'amy@email.com'],
+  ['elise', 'elise@email.com'],
+  ['tildee', 'tildee@email.com']
 ]
 
 users.each do |username, email|
   User.create(
     username: username,
-    email: email,
+    email: email
   )
 end
 
-categories = [
-  ["NSFW"],
-  ["SFW"],
-  ["Messy"],
-  ["Clean"],
-  ["Edible"],
+categories = %w[
+  NSFW
+  SFW
+  Messy
+  Clean
+  Edible
 ]
 
 categories.each do |name|
   Category.create(
-    name: name,
+    name: name
   )
 end
 
-Product.create!(name: "Bag of Dicks",
+Product.create!(name: 'Bag of Dicks',
                 price: 10,
                 stock: 200,
-                description: "Eat it.",
-                photo_url: "https://i.imgur.com/eOJJDuE.jpg",
+                description: 'Eat it.',
+                photo_url: 'https://i.imgur.com/eOJJDuE.jpg',
                 user_id: rand(1..5),
                 category_ids: [1, 5])
 
-Product.create!(name: "Glitter Bomb",
+Product.create!(name: 'Glitter Bomb',
                 price: 5,
                 stock: 200,
                 description: "Show them how much you care with the gift that keeps on giving, long after they wish it wouldn't.",
-                photo_url: "https://i.imgur.com/iWsCjox.jpg",
+                photo_url: 'https://i.imgur.com/iWsCjox.jpg',
                 user_id: rand(1..5),
                 category_ids: [2, 3])
 
-Product.create!(name: "Drop a Deuce (in their mailbox)",
+Product.create!(name: 'Drop a Deuce (in their mailbox)',
                 price: 25,
                 stock: 200,
                 description: "When you just can't give a shit anymore, we can do it for you.",
-                photo_url: "https://i.imgur.com/p6As6x8.jpg",
+                photo_url: 'https://i.imgur.com/p6As6x8.jpg',
                 user_id: rand(1..5),
                 category_ids: [2, 3])
 
-Product.create!(name: "Forbidden Lollipops",
+Product.create!(name: 'Forbidden Lollipops',
                 price: 5,
                 stock: 200,
-                description: "Hand dipped in the finest fruity wax candles.",
-                photo_url: "https://i.imgur.com/8o9Deye.png",
+                description: 'Hand dipped in the finest fruity wax candles.',
+                photo_url: 'https://i.imgur.com/8o9Deye.png',
                 user_id: rand(1..5),
                 category_ids: [2])
 
-Product.create!(name: "Chocolate Anaconda",
+Product.create!(name: 'Chocolate Anaconda',
                 price: 5,
                 stock: 200,
                 description: "Guaranteed to taste delicious even if you don't got buns, hun.",
-                photo_url: "https://i.imgur.com/xP3MtfZ.jpg",
+                photo_url: 'https://i.imgur.com/xP3MtfZ.jpg',
                 user_id: rand(1..5),
                 category_ids: [1, 5])
 
@@ -79,22 +81,22 @@ Product.create!(name: "Unsolvable Rubik's Cube",
                 price: 10,
                 stock: 200,
                 description: "For the puzzle-loving friend you clearly don't want to be friends with anymore.",
-                photo_url: "https://i.imgur.com/I1iJqEy.png",
+                photo_url: 'https://i.imgur.com/I1iJqEy.png',
                 user_id: rand(1..5),
                 category_ids: [2, 4])
 
-Product.create!(name: "Magic Trump T-Shirt",
+Product.create!(name: 'Magic Trump T-Shirt',
                 price: 10,
                 stock: 200,
                 description: "Add a little heat and things get spicy. In Spanish for a little extra boost to your Conservative relatives' blood pressure.",
-                photo_url: "https://i.imgur.com/5NGq1RT.jpg",
+                photo_url: 'https://i.imgur.com/5NGq1RT.jpg',
                 user_id: rand(1..5),
                 category_ids: [2, 4])
 
-Product.create!(name: "Tricksy T-Shirt",
+Product.create!(name: 'Tricksy T-Shirt',
                 price: 25,
                 stock: 200,
-                description: "Put our logo on your body, ya freak.",
-                photo_url: "https://i.imgur.com/XhrnBHY.png",
+                description: 'Put our logo on your body, ya freak.',
+                photo_url: 'https://i.imgur.com/XhrnBHY.png',
                 user_id: rand(1..5),
                 category_ids: [2, 4])
