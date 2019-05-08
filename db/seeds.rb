@@ -74,3 +74,27 @@ Product.create!(name: "Chocolate Anaconda",
                 photo_url: "https://i.imgur.com/xP3MtfZ.jpg",
                 user_id: rand(1..5),
                 category_ids: [1, 5])
+
+Product.create!(name: "Unsolvable Rubik's Cube",
+                price: 10,
+                stock: 200,
+                description: "For the puzzle-loving friend you clearly don't want to be friends with anymore.",
+                photo_url: "https://i.imgur.com/I1iJqEy.png",
+                user_id: rand(1..5),
+                category_ids: [2, 4])
+
+Product.create!(name: "Magic Trump T-Shirt",
+                price: 10,
+                stock: 200,
+                description: "Add a little heat and things get spicy. In Spanish for a little extra boost to your Conservative relatives' blood pressure.",
+                photo_url: "https://i.imgur.com/5NGq1RT.jpg",
+                user_id: rand(1..5),
+                category_ids: [2, 4])
+
+Product.create!(name: "Tricksy T-Shirt",
+                price: 25,
+                stock: 200,
+                description: "Put our logo on your body, ya freak.",
+                photo_url: "https://i.imgur.com/XhrnBHY.png",
+                user_id: rand(1..5),
+                category_ids: [2, 4])
