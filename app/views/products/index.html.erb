@@ -6,7 +6,8 @@
   <ul>
   <% category_id = params[:category_id] %>
   <% if category_id %>
-    <% @products = Product.category(Category.find(category_id)).order(:name) %>
+    <% category = Category.find_by(id: category_id) %>
+    <% @products = category.products %>
   <% end %>
   <% @products.each do |product| %>
     <li>
