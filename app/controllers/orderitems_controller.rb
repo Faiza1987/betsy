@@ -8,29 +8,44 @@ class OrderitemsController < ApplicationController
   def create
     order_id = get_order_id
 
+    existing_order_item = Orderitem.find_by(product_id: params[:product_id], order_id: order_id)
     order_item = Orderitem.new(status: "pending", order_id: order_id, product_id: params[:product_id], quantity: params[:quantity])
+    if existing_order_item
+      original_quantity = existing_order_item.quantity
+      existing_order_item.add_quantity(params[:quantity].to_i)
 
-    if order_item.is_quantity_valid?
-      flash[:status] = "failure"
-      flash[:result_text] = "Can't be greater than total stock for product"
-      return redirect_back(fallback_location: product_path(order_item.product_id))
-    end
+      if existing_order_item.is_quantity_invalid?
+        flash[:status] = "failure"
+        flash[:result_text] = "You are trying to add #{params[:quantity]} #{Product.find_by(id: params[:product_id]).name} to the existing #{original_quantity} in your cart, which exceeds the number availalbe in stock"
+        return redirect_back(fallback_location: product_path(existing_order_item.product_id))
+      end
 
-    if order_item.save
-      existing_order = Order.find_by(id: order_item.order_id)
-      existing_product = Product.find_by(id: order_item.product_id)
-
-      existing_order.orderitem_ids << order_item.id
-      existing_product.orderitem_ids << order_item.id
-      flash[:result_text] = "Order item added successfully"
+      existing_order_item.update(quantity: existing_order_item.quantity)
 
       redirect_to order_path(order_id)
     else
-      flash[:status] = :failure
-      flash[:result_text] = "Cannot create order item"
-      flash[:messages] = order_item.errors.messages
+      if order_item.is_quantity_invalid?
+        flash[:status] = "failure"
+        flash[:result_text] = "Can't be greater than total stock for product"
+        return redirect_back(fallback_location: product_path(order_item.product_id))
+      end
 
-      redirect_back(fallback_location: product_path(order_item.product_id))
+      if order_item.save
+        existing_order = Order.find_by(id: order_item.order_id)
+        existing_product = Product.find_by(id: order_item.product_id)
+
+        existing_order.orderitem_ids << order_item.id
+        existing_product.orderitem_ids << order_item.id
+        flash[:result_text] = "Order item added successfully"
+
+        redirect_to order_path(order_id)
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "Cannot create order item"
+        flash[:messages] = order_item.errors.messages
+
+        redirect_back(fallback_location: product_path(order_item.product_id))
+      end
     end
   end
 
@@ -41,7 +56,7 @@ class OrderitemsController < ApplicationController
   def update
     if params[:orderitem][:quantity].to_i > Product.find_by(id: @order_item.product_id).stock
       flash[:status] = :failure
-      flash[:result_text] = "Can't be greater than total stock for product"
+      flash[:result_text] = "Quantity can't be greater than #{Product.find_by(id: @order_item.product_id).stock}"
       redirect_back(fallback_location: root_path)
       return
     end
