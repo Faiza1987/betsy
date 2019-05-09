@@ -33,7 +33,7 @@ describe Orderitem do
     end
   end
 
-  describe "custom methods" do
+  describe "custom quantity invalid method" do
     it "will return false if quantity is less than stock" do
     end
 
@@ -42,5 +42,11 @@ describe Orderitem do
 
     it "will return true if quantity larger than stock" do
     end
+  end
+
+  describe "custom calculate cost method" do
+  end
+
+  describe "custom add quantity method" do
   end
 end
