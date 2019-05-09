@@ -11,17 +11,9 @@
   <% if !products.nil? %>
     <% products.each do |product|%>
     <p><%= link_to image_tag(product.photo_url, :size => "300x300"), product_path(product.id) %></p>
-    <p><%= product.name %></p>
+    <p><%= link_to (product.name), product_path(product.id) %></p>
     <% end %>
-    <p><%= render template: "orderitems/_new" %></p>
   </section>
-  <section>
-    <p>Categories: 
-      <% categories = Category.all %>
-      <% categories.each do |category| %>
-        <a class="dropdown-item"><%=link_to category.name, category_products_path(category.id), method: :get %> </a>
-      <% end %>
-    </section>
     <% else %>
     <section>
     User has no products.
