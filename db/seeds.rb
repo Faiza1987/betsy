@@ -53,7 +53,7 @@ Product.create!(name: "Glitter Bomb",
                 user_id: rand(1..5),
                 category_ids: [2, 3])
 
-Product.create!(name: "Drop a Deuce (in their mailbox)",
+Product.create!(name: "Drop a Deuce via Mail",
                 price: 25,
                 stock: 200,
                 description: "When you just can't give a shit anymore, we can do it for you.",
