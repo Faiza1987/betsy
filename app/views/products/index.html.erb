@@ -1,6 +1,7 @@
 <div class="product-page-container">
-  <h1 class="product-header"><u>All products</u></h1>
-
+  <div class="product-header-container">
+    <h1 class="product-header">All Products</h1>
+  </div>
   <% category_id = params[:category_id] %>
   <% if category_id %>
     <% category = Category.find_by(id: category_id) %>

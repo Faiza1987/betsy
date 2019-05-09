@@ -138,10 +138,10 @@ a:visited {
 }
 
 .product-wrapper {
-  width: 100%;
+  width: 99%;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  grid-gap: 2px;
+  grid-gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -204,6 +204,11 @@ ul li {
     margin-left: 50px;
 }
 
-.product-header {
-    text-align: center;
+.product-header-container {
+    width: 33%;
+    background-color: #022b1a;
 }
+
+// .product-header {
+//     text-align: center;
+// }

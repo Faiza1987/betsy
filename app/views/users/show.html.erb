@@ -22,7 +22,10 @@
         <a class="dropdown-item"><%=link_to category.name, category_products_path(category.id), method: :get %> </a>
       <% end %>
     </section>
+    <% else %>
+    <section>
+    User has no products.
+    </section>
   <% end %>
 </section>
-
 </div>
