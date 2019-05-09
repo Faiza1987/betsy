@@ -19,18 +19,18 @@
           <li class="nav-item">
             <a class="nav-link" href="/products"> All Products </a>
           </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               By Category
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Clean</a>
-              <a class="dropdown-item" href="#">Edible</a>
-              <a class="dropdown-item" href="#">Messy</a>
-              <a class="dropdown-item" href="#">NSFW</a>
-              <a class="dropdown-item" href="#">SFW</a>
+              <% categories = Category.all %>
+              <% categories.each do |category| %>
+                <a class="dropdown-item"><%=link_to category.name, category_products_path(category.id), method: :get %> </a>
+              <% end %>
+      
             </div>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/users"> All Users </a>
           </li>

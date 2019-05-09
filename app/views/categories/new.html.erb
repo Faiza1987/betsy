@@ -1,0 +1,9 @@
+<h1>Add a Category</h1>
+<%= form_for @category do |f| %>
+  <%= f.label :name, 'Category' %>
+  <%= f.text_field :category_name %>
+  <%= f.label :products, 'Add the new Category to your existing Products' %>
+  <%= f.collection_check_boxes(:product_ids, @current_user.products, :id, :name ) %>
+  <br>
+  <%= f.submit "Add Category" %>
+<% end %>

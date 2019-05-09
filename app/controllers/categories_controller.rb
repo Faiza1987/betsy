@@ -1,6 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :require_login, only: [:new, :create]
 
+  def index
+    @categories = Category.all.order(:name)
+  end
+  
   def new
     @category = Category.new
   end

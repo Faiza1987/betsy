@@ -10,9 +10,9 @@
     <p>Price: <%= product.price %></p>
     <p><%= image_tag(product.photo_url, :size => "300x300") %></p>
     <p>Description: <%= product.description %></p>
-    <p>Categories: <%# @product.category_ids.each do |category| %> 
-      <%#= link_to category.name, category_products_path(category.id)  %>
-    <%# end %></p>
+    <p>Categories: <% @product.category_ids.each do |category| %> 
+      <%= link_to category.name, category_products_path(category.id)  %>
+    <% end %></p>
     <p><%= render template: "orderitems/_new" %></p>
   <% end %>
 </section>
