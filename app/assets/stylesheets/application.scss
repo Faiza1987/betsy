@@ -21,9 +21,11 @@
 
 @import "**/*";
 #navbar {
-    background-color: white;
+    background-color: #022b1a;
     display: flex;
     justify-content: space-between;
+    border-top: white;
+    border-top-style: solid;
 }
 
 #navbar .navbar-brand {
@@ -45,31 +47,65 @@
     padding-top: .5em;
 }
 
+html body {
+    background-image: url('https://lh3.googleusercontent.com/qutYFKzq0_peiBt0neGlJ5dMtd7nwLLX1a24GIVsXC_R5FJ0J5cCckWiF6CvOLUFg3fXV581aqRScrzdCjlzyl39LubJkfFmynQUA3ruMZFF1h_lEF1atWd6VfT8F6-s_cMC7wxh-Q=w2400'); 
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    font-family: 'Exo', sans-serif;
+}
+
 .header-site {
     background-color: #022b1a;
-    height: 200px;
+    height: 202px;
     text-align: center;
+    padding-bottom: 1px;
 }
 
 .header-img {
     height: 200px;
     width: 220px;
-    // background-position-y: 50%;
-    // background-position-x: center;
 }
 
 body { 
-    background-color: white;
+    margin: 40px;
 }
 
-// .header-site {
-//     background: url('hhttps://lh3.googleusercontent.com/DPFYyakJc5BjDoFmaOC4tyxvqS7udeSYBle73RA4IX3W1ZiiOBkuFQrtysqk-pg1cqhttdmnss62Hyj_YndPRIT5_zAauL99MCY-fL-pdz2XSe14oCdPLViEtW5QynkyyTrPfG3HKA=w2400');
-//     // background-color:  #022b1a;
-//     // background-repeat: no-repeat;
-//     // background-position: center center;
-//     // -webkit-background-size: cover;
-//     // -moz-background-size: cover;
-//     // -o-background-size: cover;
-//     background-size: cover;
-//     padding-bottom: 15%;
-// }
+footer {
+    text-align: center;
+    background-color: #022b1a;
+    padding: 25px;
+}
+
+.footer {
+    margin: auto;
+    width: 500px;
+    height: 50px;
+    display: inline-block;
+}
+
+.page-container {
+    display: table;
+    min-height: 100px;
+    width: 100%;
+    background-color: #022b1a;
+    opacity: 0.8;
+}
+
+.page {
+    text-align: center;
+    font-family: 'Righteous', cursive;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+a:link {
+    color: white;
+}
+a:visited {
+    color: white;
+}
