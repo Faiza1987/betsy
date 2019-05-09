@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   has_many :orderitems
   has_many :products, :through => :orderitems
+  validates :status, presence: true
 
   # validates :name, presence: true
   # validates :email, presence: true

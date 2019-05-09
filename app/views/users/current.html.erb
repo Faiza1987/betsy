@@ -18,27 +18,22 @@
   </ul>
 </section>
 
-<section class="all-orders">
-  <h3>Paid Orders</h3>
-  <ul>
-  <% @user.products.each do |product| %>
-    <% product.orderitem_ids.each do |id| %>
-      <% order = Order.find_by(id: Orderitem.find_by(id: id).order_id) %>
-      <li>
-        <p>Order number: <%= order.id %></p>
-        <p>Order status: <%= order.status %></p>
-      </li>
-    <% end %>
-  <% end %>
-  </ul>
-</section>
-
 <section class="metrics">
   <h3>Total Revenue: <%= @user.total_revenue %></h3>
 </section>
 
 <section class="order-monitor">
-  <h3>Pending orders: <%= @user.count_orders("pending").length %></h3>
-  <h3>Paid orders: <%= @user.count_orders("Paid").length %></h3>
-
-</section>
+  <% pending_orders = @user.count_orders("pending") %>
+  <% paid_orders = @user.count_orders("Paid") %>
+  <h3>Pending orders: <%= pending_orders.length %></h3>
+  
+  <h3>Paid orders: <%= paid_orders.length %></h3>
+  <ul>
+    <% paid_orders. each do |order| %>
+      <h4>Order # <%= order.id %></h4>
+      <li>Name: <%= order.name %></li>
+      <li>Email: <%= order.email %></li>
+      <li>Mailing Address: <%= order.mailing_address %></li>
+    <% end %>
+  </ul>
+</ul>
