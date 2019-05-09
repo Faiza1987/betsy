@@ -21,7 +21,7 @@
 
 @import "**/*";
 #navbar {
-    background-color: aqua;
+    background-color: white;
     display: flex;
     justify-content: space-between;
 }
@@ -44,3 +44,32 @@
 #navbar #cart {
     padding-top: .5em;
 }
+
+.header-site {
+    background-color: #022b1a;
+    height: 200px;
+    text-align: center;
+}
+
+.header-img {
+    height: 200px;
+    width: 220px;
+    // background-position-y: 50%;
+    // background-position-x: center;
+}
+
+body { 
+    background-color: white;
+}
+
+// .header-site {
+//     background: url('hhttps://lh3.googleusercontent.com/DPFYyakJc5BjDoFmaOC4tyxvqS7udeSYBle73RA4IX3W1ZiiOBkuFQrtysqk-pg1cqhttdmnss62Hyj_YndPRIT5_zAauL99MCY-fL-pdz2XSe14oCdPLViEtW5QynkyyTrPfG3HKA=w2400');
+//     // background-color:  #022b1a;
+//     // background-repeat: no-repeat;
+//     // background-position: center center;
+//     // -webkit-background-size: cover;
+//     // -moz-background-size: cover;
+//     // -o-background-size: cover;
+//     background-size: cover;
+//     padding-bottom: 15%;
+// }
