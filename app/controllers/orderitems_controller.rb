@@ -8,29 +8,42 @@ class OrderitemsController < ApplicationController
   def create
     order_id = get_order_id
 
+    existing_order_item = Orderitem.find_by(product_id: params[:product_id], order_id: order_id)
     order_item = Orderitem.new(status: "pending", order_id: order_id, product_id: params[:product_id], quantity: params[:quantity])
+    if existing_order_item
+      existing_order_item.quantity += params[:quantity].to_i
+      existing_order_item.update(quantity: existing_order_item.quantity)
 
-    if order_item.is_quantity_valid?
-      flash[:status] = "failure"
-      flash[:result_text] = "Can't be greater than total stock for product"
-      return redirect_back(fallback_location: product_path(order_item.product_id))
-    end
-
-    if order_item.save
-      existing_order = Order.find_by(id: order_item.order_id)
-      existing_product = Product.find_by(id: order_item.product_id)
-
-      existing_order.orderitem_ids << order_item.id
-      existing_product.orderitem_ids << order_item.id
-      flash[:result_text] = "Order item added successfully"
+      if existing_order_item.is_quantity_invalid?
+        flash[:status] = "failure"
+        flash[:result_text] = "Can't be greater than total stock for product"
+        return redirect_back(fallback_location: product_path(existing_order_item.product_id))
+      end
 
       redirect_to order_path(order_id)
     else
-      flash[:status] = :failure
-      flash[:result_text] = "Cannot create order item"
-      flash[:messages] = order_item.errors.messages
+      if order_item.is_quantity_invalid?
+        flash[:status] = "failure"
+        flash[:result_text] = "Can't be greater than total stock for product"
+        return redirect_back(fallback_location: product_path(order_item.product_id))
+      end
 
-      redirect_back(fallback_location: product_path(order_item.product_id))
+      if order_item.save
+        existing_order = Order.find_by(id: order_item.order_id)
+        existing_product = Product.find_by(id: order_item.product_id)
+
+        existing_order.orderitem_ids << order_item.id
+        existing_product.orderitem_ids << order_item.id
+        flash[:result_text] = "Order item added successfully"
+
+        redirect_to order_path(order_id)
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "Cannot create order item"
+        flash[:messages] = order_item.errors.messages
+
+        redirect_back(fallback_location: product_path(order_item.product_id))
+      end
     end
   end
 
