@@ -24,7 +24,7 @@
     background-color: #022b1a;
     display: flex;
     justify-content: space-between;
-    border-top: white;
+    // border-top: white;
     border-top-style: solid;
 }
 
@@ -109,6 +109,14 @@ footer {
     margin-bottom: 10px;
 }
 
+.product-page-container {
+    display: table;
+    min-height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .page {
     text-align: center;
     font-family: 'Righteous', cursive;
@@ -133,13 +141,12 @@ a:visited {
   width: 100%;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  grid-gap: 10px;
+  grid-gap: 2px;
   margin-bottom: 20px;
 }
 
 .box-wrapper {
-    // background-color: #022b1a;
-    
+    background-color: #022b1a;
     border-radius: 1px;
     padding: 5px;
 }
@@ -159,8 +166,9 @@ h1, h2, h3 {
 }
 
 .back-color {
-    display: table;
     width: 100%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
     background-color: #022b1a;
     opacity: 0.8;
     padding: 20px;
@@ -180,4 +188,12 @@ h1, h2, h3 {
 
 ul li {
     list-style-type: none;
+}
+
+.user-index {
+    margin-left: 50px;
+}
+
+.product-header {
+    text-align: center;
 }

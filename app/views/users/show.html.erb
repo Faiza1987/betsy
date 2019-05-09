@@ -1,25 +1,28 @@
+<div class="back-color">
 <section>
   <h2>User Summary: <%= @user.username %> </h2>
   <p> Became a merchant: <%= render_date @user.created_at %></p>
-</section>
-
-<section>
+  <%= link_to "Home", root_path %>
+  <br>
+  </section>
+  <section>
+  <h3> Products </h3>
   <% product = Product.find_by(user_id: @user.id) %>
   <% if product %>
-    <p>Stock: <%= product.stock %></p>
-    <p>Price: <%= product.price %></p>
     <p><%= image_tag(product.photo_url, :size => "300x300") %></p>
     <p>Description: <%= product.description %></p>
+    <p>Stock: <%= product.stock %></p>
+    <p>Price: <%= product.price %></p>
+    <p><%= render template: "orderitems/_new" %></p>
+  </section>
+  <section>
     <p>Categories: 
       <% categories = Category.all %>
       <% categories.each do |category| %>
         <a class="dropdown-item"><%=link_to category.name, category_products_path(category.id), method: :get %> </a>
       <% end %>
-    <p><%= render template: "orderitems/_new" %></p>
+    </section>
   <% end %>
 </section>
 
-
-<section>
-  <%= link_to "Home", root_path %>
-</section>
+</div>
