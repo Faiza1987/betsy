@@ -13,7 +13,7 @@
         <%= order_item.quantity %> 
         <% if cookies[:order_id] %>
           <%= link_to "Edit", edit_orderitem_path(id) %>
-          <%= link_to "Delete", orderitem_path(id), method: :delete %>
+          <%= link_to "Delete", orderitem_path(id), method: :delete, data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %>
         <% end %>    
       </li>
     <% end %>
