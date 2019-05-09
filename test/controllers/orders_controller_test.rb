@@ -15,6 +15,8 @@ describe OrdersController do
         # delete all orderitems because this is the middle table connecting user, product and order
         orderitems(:trick).destroy
         orderitems(:treat).destroy
+        orderitems(:halloween).destroy
+        orderitems(:candy).destroy
 
         get orders_path
         expect(flash[:message]).must_equal "You do not have any existing orders"

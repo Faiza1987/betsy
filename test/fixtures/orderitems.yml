@@ -18,3 +18,8 @@ pumpkin:
   quantity: 101
   order: two
   product: honk
+
+candy:
+  quantity: 1
+  order: one
+  product: chair

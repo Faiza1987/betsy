@@ -53,7 +53,7 @@ describe Orderitem do
     end
 
     it "will return total cost for quantity one" do
-      expect(orderitems(:trick).calculate_cost).must_equal 1000
+      expect(orderitems(:candy).calculate_cost).must_equal 2500
     end
   end
 
