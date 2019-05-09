@@ -1,40 +1,10 @@
 require "test_helper"
 
 describe OrderitemsController do
-  # describe "index" do
-  #   it "should get index" do
-  #     get orderitems_path
-
-  #     must_respond_with :success
-  #   end
-  # end
-
-  # describe "show" do
-  #   it "should be OK to show an existing, valid order item" do
-  #     valid_orderitem_id = orderitems(:trick).id
-
-  #     get orderitem_path(valid_orderitem_id)
-
-  #     must_respond_with :success
-  #   end
-
-  #   it "should give a flash notice instead of showing a non-existant, invalid order item" do
-  #     order_item = orderitems(:treat)
-  #     invalid_orderitem_id = order_item.id
-  #     order_item.destroy
-
-  #     # Act
-  #     get orderitem_path(invalid_orderitem_id)
-
-  #     # Assert
-  #     must_respond_with :redirect
-  #     expect(flash[:error]).must_equal "Unknown order item"
-  #   end
-  # end
-
   describe "create" do
     it "will save a new order item and redirect if given valid inputs" do
       input_quantity = 3
+      input_status = "pending"
       test_input = {
         quantity: input_quantity,
         product_id: products(:honk).id,
@@ -50,11 +20,14 @@ describe OrderitemsController do
       expect(new_orderitem.quantity).must_equal input_quantity
       expect(new_orderitem.product_id).must_equal products(:honk).id
       expect(new_orderitem.order_id).must_equal cookies[:order_id].to_i
+      expect(new_orderitem.status).must_equal input_status
+
+      expect(flash[:result_text]).must_equal "Order item added successfully"
 
       must_respond_with :redirect
     end
 
-    it "will give a 400 error with invalid params" do
+    it "will redirect to the product show page when given invalid params" do
       input_quantity = ""
       test_input = {
         "orderitem": {
@@ -68,8 +41,8 @@ describe OrderitemsController do
         post product_orderitems_path(products(:chair).id), params: test_input
       }.wont_change "Orderitem.count"
 
-      expect(flash[:quantity]).must_equal ["can't be blank"]
-      must_respond_with :bad_request
+      expect(flash[:result_text]).must_equal "Cannot create order item"
+      must_respond_with :redirect
     end
   end
 
