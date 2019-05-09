@@ -1,14 +1,18 @@
+<div class="review-back-color">
 <h1>Review Product</h1>
 
 <%= form_for @review, url: product_reviews_path(params[:product_id]) do |f| %>
 
   <strong>Product:</strong> <%= @review.product.name %>
-
+  <br>
   <%= f.label :rating, "Rating" %>
   <%= f.select :rating, (1..5).to_a %>
-
+  <br>
   <%= f.label :description, "Details" %>
+  <br>
   <%= f.text_area :description, placeholder: "Write your review here." %>
-
+  <br>
+  <br>
   <%= f.submit "Submit" %>
 <% end %>
+</div>

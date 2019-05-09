@@ -1,19 +1,21 @@
-<section>
-  <h1>All products</h1>
-</section>
-
-<section class="view-all-products">
-  <ul>
+<div class="product-page-container">
+  <div class="product-header-container">
+    <h1 class="product-header">Products</h1>
+  </div>
   <% category_id = params[:category_id] %>
   <% if category_id %>
     <% category = Category.find_by(id: category_id) %>
     <% @products = category.products %>
   <% end %>
+  <div class="product-wrapper">
   <% @products.each do |product| %>
-    <li>
+    <div class="box-wrapper">
+      <div class="box">
+      <%= image_tag(product.photo_url, size: "200x200") %>
+      <br>
       <%= link_to product.name, product_path(product.id) %>
-      <%= product.price %>
-    </li>
+      </div>
+    </div>
   <% end %>
-  </ul>
-</section>
+  </div>
+</div>

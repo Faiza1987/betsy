@@ -1,31 +1,37 @@
-<section>
-  <h3>Please fill in your information below</h3>
-</section>
-
-<section>
+<div class="back-color">
+  <h3>Please provide your billing information:</h3>
+  
   <%= form_with model: @order, url: order_path(cookies[:order_id]), method: :patch do |f| %>
 
     <%= f.label :name %>
+    <br>
     <%= f.text_field :name %>
-
+    <br>
     <%= f.label :email %>
+    <br>
     <%= f.text_field :email %>
-
+    <br>
     <%= f.label :mailing_address %>
+    <br>
     <%= f.text_field :mailing_address %>
-
+    <br>
     <%= f.label :credit_card_num %>
+    <br>
     <%= f.text_field :credit_card_num %>
-
+    <br>
     <%= f.label :card_expiration_date %>
+    <br>
     <%= f.text_field :card_expiration_date %>
-
+    <br>
     <%= f.label :cvv %>
+    <br>
     <%= f.text_field :cvv %>
-
+    <br>
     <%= f.label :billing_zip_code %>
+    <br>
     <%= f.text_field :billing_zip_code %>
-
+    <br>
+    <br>
     <%= f.submit "Place Order" %>
   <% end %>
-</section>
+</div>
