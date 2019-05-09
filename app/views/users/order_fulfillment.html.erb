@@ -1,0 +1,21 @@
+<section>
+  <% total_revenue = Order.all.calculate_total  %>
+  <p>Total Revenue: <%= @total_revenue %></p>
+  
+  <% total_revenue_by_status = total_revenue.status %>
+  <p>Total Revenue by status: <%= total_revenue_by_status %> </p>
+
+  <% all_orders_by_status = Order.all.status %>
+  <p>All orders by status: <%= all_orders_by_status %> </p>
+
+  <p>All orders:</p>
+  <ul>
+    <% @orders.each do |order| %>
+      <li> <%= link_to order.name, product_path(order.id) %></li>  
+    <% end %> 
+  </ul>
+
+  <% order_status = Order.find_by(id: params[:id]).status %>
+  <p>Order status: <%= order_status %> </p>
+  
+</section>

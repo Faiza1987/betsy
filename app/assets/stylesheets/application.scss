@@ -20,6 +20,27 @@
 /* Import scss content */
 
 @import "**/*";
-nav {
+#navbar {
     background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+}
+
+#navbar .navbar-brand {
+    padding-right: 5em;
+}
+
+#navbar .nav-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#navbar #login {
+    padding-left: 25em;
+    padding-top: .5em;
+}
+
+#navbar #cart {
+    padding-top: .5em;
 }
