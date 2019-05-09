@@ -1,7 +1,12 @@
-<h2>List of Users</h2>
-
-<% @users.each do |user| %>
-  <%= link_to user.username, user_path(user.id) %>
-<% end %>
-
-<%= link_to "Home", root_path %>
+<div class="page-container">
+  <div class="user-index">
+    <h2>List of Users</h2>
+    <br>
+    <% @users.each do |user| %>
+      <%= link_to user.username, user_path(user.id) %>
+      <br>
+    <% end %>
+    <br>
+    <%= link_to "Home", root_path %>
+  </div>
+</div>

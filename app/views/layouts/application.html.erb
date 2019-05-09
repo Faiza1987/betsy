@@ -4,10 +4,14 @@
     <title>Betsy</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="https://fonts.googleapis.com/css?family=Exo|Righteous" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <header class="header-site">
+  <img src="https://lh3.googleusercontent.com/g6qHexTemJB357Wg2tjUaMHrbs_b2VQFX9aFqJ3L8KhNVP4cpfNvQnbN2OqjtqrCM2GaCYQ_7X4AJgfGKtKm2qmLC6PeMUNSyCqmLpYJDghltqe4wLEN63JRI-uI4w3Xs9htrupOzg=w2400" alt="Tricksy Logo" class="header-img">
+  </header>
   <body>
     <div id="navbar">
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -22,7 +26,6 @@
           <li class="nav-item">
             <a class="nav-link" href="/products"> All Products </a>
           </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               By Category
@@ -32,15 +35,21 @@
               <% categories.each do |category| %>
                 <a class="dropdown-item"><%=link_to category.name, category_products_path(category.id), method: :get %> </a>
               <% end %>
-      
             </div>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/users"> Merchants </a>
           </li>
           <div id="login">
           <% if session[:user_id] %>
-            <li class="nav-item"><%= link_to("#{User.find(session[:user_id]).username}", current_user_path) %></li>
-            <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= link_to("#{User.find(session[:user_id]).username}", current_user_path) %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item"> <%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %> </a>
+                </div>
+              </li>
           <% else %>
             <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
           <% end %>
@@ -58,7 +67,6 @@
       </div>
     </nav>
     </div>
-
     <% if flash[:result_text] || flash[:messages] %>
       <section class="alert__container">
         <div class="alert alert-<%= flash[:status].to_s == 'failure' ? 'warning' : flash[:status] %>">
@@ -78,4 +86,11 @@
       <%= yield %>
     </main>
   </body>
+  <footer>
+    <div class="footer">
+      <a href="https://www.facebook.com/"> <i class="fab fa-facebook"></i> Facebook | </a>
+      <a href="https://www.instagram.com/" ><i class="fab fa-instagram"></i> Instagram | </a>
+      <a href="https://github.com/Faiza1987/betsy"><i class="fab fa-github"></i> Github</a>
+    </div>
+  </footer>
 </html>

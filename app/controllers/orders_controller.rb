@@ -34,17 +34,22 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find_by(id: params[:id])
 
-    is_successful = @order.update(order_params)
-
-    @order.update_attributes(:status => "Paid")
-
     @order.orderitem_ids.each do |id|
       order_item = Orderitem.find_by(id: id)
+      if order_item.is_quantity_invalid?
+        flash[:status] = :warning
+        flash[:result_text] = "There is not enough #{Product.find_by(id: order_item.product_id).name} in stock"
+        return redirect_to order_path(@order.id)
+      end
       order_item_quantity = order_item.quantity
       product = Product.find_by(id: order_item.product_id)
       new_quantity = product.stock - order_item_quantity
       product.update_attributes(:stock => new_quantity)
     end
+
+    is_successful = @order.update(order_params)
+
+    @order.update_attributes(:status => "Paid")
 
     if is_successful
       flash[:result_text] = "Order was placed successully"
