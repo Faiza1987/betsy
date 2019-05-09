@@ -41,7 +41,7 @@ describe OrderitemsController do
         post product_orderitems_path(products(:chair).id), params: test_input
       }.wont_change "Orderitem.count"
 
-      expect(flash[:quantity]).must_equal ["can't be blank", "is not a number"]
+      expect(flash[:result_text]).must_equal "Cannot create order item"
       must_respond_with :redirect
     end
   end
