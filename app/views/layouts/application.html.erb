@@ -35,15 +35,21 @@
               <% categories.each do |category| %>
                 <a class="dropdown-item"><%=link_to category.name, category_products_path(category.id), method: :get %> </a>
               <% end %>
-      
             </div>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/users"> Merchants </a>
           </li>
           <div id="login">
           <% if session[:user_id] %>
-            <li class="nav-item"><%= link_to("#{User.find(session[:user_id]).username}", current_user_path) %></li>
-            <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= link_to("#{User.find(session[:user_id]).username}", current_user_path) %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item"> <%= link_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure you want to Log Out?" } %> </a>
+                </div>
+              </li>
           <% else %>
             <li class="nav-item"><%= link_to "Log In", github_login_path %></li>
           <% end %>
