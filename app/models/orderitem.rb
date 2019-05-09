@@ -13,6 +13,10 @@ class Orderitem < ApplicationRecord
     return self.product.price * self.quantity
   end
 
+  def add_quantity(amount_to_add)
+    self.quantity += amount_to_add
+  end
+
   private
 
   # custom validation
