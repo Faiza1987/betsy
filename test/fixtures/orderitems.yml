@@ -8,3 +8,13 @@ treat:
   quantity: 2
   order: two
   product: chair
+
+halloween:
+  quantity: 100
+  order: one
+  product: honk
+
+pumpkin:
+  quantity: 101
+  order: two
+  product: honk
