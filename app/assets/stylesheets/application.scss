@@ -175,6 +175,17 @@ h1, h2, h3 {
     margin-bottom: 10px;
 }
 
+.review-back-color {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    background-color: #022b1a;
+    opacity: 0.8;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .product-show-margin {
     margin: 40px;
 }
