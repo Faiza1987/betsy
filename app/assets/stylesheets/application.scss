@@ -61,7 +61,7 @@ html body {
 
 .header-site {
     background-color: #022b1a;
-    height: 202px;
+    height: 220px;
     text-align: center;
     padding-bottom: 1px;
 }
@@ -69,6 +69,8 @@ html body {
 .header-img {
     height: 200px;
     width: 220px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 body { 
@@ -94,6 +96,8 @@ footer {
     width: 100%;
     background-color: #022b1a;
     opacity: 0.8;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .page {
@@ -106,6 +110,65 @@ footer {
 a:link {
     color: white;
 }
+
+a:hover {
+    text-decoration: none;
+    background-color: rgb(154, 184, 135);
+}
+
 a:visited {
     color: white;
+}
+
+.product-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.box-wrapper {
+    // background-color: #022b1a;
+    
+    border-radius: 1px;
+    padding: 5px;
+}
+
+.box {
+    color: #fff;
+    font-size: 150%;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px;
+}
+
+h1, h2, h3 {
+    font-family: 'Righteous', cursive;
+}
+
+.back-color {
+    display: table;
+    width: 100%;
+    background-color: #022b1a;
+    opacity: 0.8;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.product-show-margin {
+    margin: 40px;
+}
+
+.h-border {
+    border-bottom: white;
+    border-bottom-style: solid;
+    width: 250px;
+}
+
+ul li {
+    list-style-type: none;
 }

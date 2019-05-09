@@ -1,22 +1,16 @@
-<section>
+<div class="back-color">
   <h2><%= @product.name.upcase %></h2>
-</section>
 
-<section>
-  <p>Stock: <%= @product.stock %></p>
-  <p>Price: <%= @product.price %></p>
+<section class="product-show-margin">
   <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
-  <p>Description: <%=@product.description %></p>
-  <p>Categories: <%# @product.category_ids.each do |category| %> 
-    <%#= link_to category.name, category_products_path(category.id)  %>
-  <%# end %></p>
+  <h2 class="h-border"> <%=@product.description %></h2>
+  <p>Stock: <%= @product.stock %></p>
+  <p>Price: <%= "$#{@product.price}" %></p>
   <p><%= render template: "orderitems/_new" %></p>
-</section>
-
-<section>
-    <h3>Reviews</h3>
+    <h3 class="h-border">Reviews</h3>
     <p> Average rating:
       <% if @product.reviews.count == 0 %>
+      <br>
           No Reviews
       <%else%>
         <%= @product.average_rating.round(1) %>
@@ -27,12 +21,17 @@
       <% end %>
     </section>
   <ul>
+    <% i = 1 %>
     <% @product.reviews.each do |review| %>
-    <p>
-      <li> Rating: <%= review.rating %> </li>
-      <li>
-        <%= review.description %> </li>
-      </p>
+    <section>
+      Review <%= i %>
+      <br>
+      Description: &nbsp;&nbsp; <%= review.description %>
+      <br>
+      Rating: <%= review.rating %>
+      <% i += 1 %>
+      </section>
       <% end %>
     </ul>
   </section>
+</div>
