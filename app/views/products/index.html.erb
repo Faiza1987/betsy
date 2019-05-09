@@ -4,6 +4,11 @@
 
 <section class="view-all-products">
   <ul>
+  <% category_id = params[:category_id] %>
+  <% if category_id %>
+    <% category = Category.find_by(id: category_id) %>
+    <% @products = category.products %>
+  <% end %>
   <% @products.each do |product| %>
     <li>
       <%= link_to product.name, product_path(product.id) %>
