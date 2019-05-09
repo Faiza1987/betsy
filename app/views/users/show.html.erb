@@ -7,12 +7,12 @@
   </section>
   <section>
   <h3> Products </h3>
-  <% product = Product.find_by(user_id: @user.id) %>
-  <% if product %>
-    <p><%= image_tag(product.photo_url, :size => "300x300") %></p>
-    <p>Description: <%= product.description %></p>
-    <p>Stock: <%= product.stock %></p>
-    <p>Price: <%= product.price %></p>
+  <% products = Product.where(user_id: @user.id) %>
+  <% if !products.nil? %>
+    <% products.each do |product|%>
+    <p><%= link_to image_tag(product.photo_url, :size => "300x300"), product_path(product.id) %></p>
+    <p><%= product.name %></p>
+    <% end %>
     <p><%= render template: "orderitems/_new" %></p>
   </section>
   <section>
