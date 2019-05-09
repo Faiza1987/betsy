@@ -23,12 +23,12 @@ users.each do |username, email|
   )
 end
 
-categories = %w[
-  NSFW
-  SFW
-  Messy
-  Clean
-  Edible
+categories = [
+  "NSFW",
+  "SFW",
+  "Messy",
+  "Clean",
+  "Edible",
 ]
 
 categories.each do |name|
@@ -57,7 +57,7 @@ Product.create!(name: "Drop a Deuce (in their mailbox)",
                 price: 25,
                 stock: 200,
                 description: "When you just can't give a shit anymore, we can do it for you.",
-                photo_url: "https://i.imgur.com/p6As6x8.jpg",
+                photo_url: "https://i.imgur.com/UtsUkL7.png",
                 user_id: rand(1..5),
                 category_ids: [2, 3])
 
