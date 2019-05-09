@@ -3,10 +3,11 @@
 </section>
 
 <section>
-  <%= link_to "Add a new product", new_user_product_path(@user.id), method: :get %>
+  <h3><%= link_to "Add a new product", new_user_product_path(@user.id), method: :get %></h3>
 </section>
 
 <section class="all-products">
+  <h3>Your existing products</h3>
   <ul>
   <% @user.products.each do |product| %>
     <li>
@@ -18,15 +19,26 @@
 </section>
 
 <section class="all-orders">
+  <h3>Paid Orders</h3>
   <ul>
   <% @user.products.each do |product| %>
     <% product.orderitem_ids.each do |id| %>
       <% order = Order.find_by(id: Orderitem.find_by(id: id).order_id) %>
       <li>
-        <%= order.id %>
-        <%= order.status %>
+        <p>Order number: <%= order.id %></p>
+        <p>Order status: <%= order.status %></p>
       </li>
     <% end %>
   <% end %>
   </ul>
+</section>
+
+<section class="metrics">
+  <h3>Total Revenue: <%= @user.total_revenue %></h3>
+</section>
+
+<section class="order-monitor">
+  <h3>Pending orders: <%= @user.count_orders("pending").length %></h3>
+  <h3>Paid orders: <%= @user.count_orders("Paid").length %></h3>
+
 </section>
