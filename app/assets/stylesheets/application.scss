@@ -145,6 +145,33 @@ a:visited {
   margin-bottom: 20px;
 }
 
+.home-head-wrapper {
+  text-align: center;
+//   grid-column-start: 1;
+//   grid-column-end: 4;
+}
+
+.home-box-1 {
+    color: #fff;
+    // text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.home-box-2 {
+    color: #fff;
+    // text-align: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.home-box-3 {
+    color: #fff;
+    // text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
 .box-wrapper {
     background-color: #022b1a;
     border-radius: 1px;
