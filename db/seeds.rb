@@ -59,7 +59,7 @@ Product.create!(name: "Drop a Deuce via Mail",
                 description: "When you just can't give a shit anymore, we can do it for you.",
                 photo_url: "https://i.imgur.com/UtsUkL7.png",
                 user_id: rand(1..5),
-                category_ids: [2, 3])
+                category_ids: [3])
 
 Product.create!(name: "Forbidden Lollipops",
                 price: 5,
@@ -69,13 +69,13 @@ Product.create!(name: "Forbidden Lollipops",
                 user_id: rand(1..5),
                 category_ids: [2])
 
-Product.create!(name: "Chocolate Anaconda",
+Product.create!(name: "Chamber of Secrets",
                 price: 5,
                 stock: 200,
-                description: "Guaranteed to taste delicious even if you don't got buns, hun.",
-                photo_url: "https://i.imgur.com/xP3MtfZ.jpg",
+                description: "Nearly impossible to open, it is sure to turn that new package excitement right around.  What's our secret?  Nothing.  It's just a USPS box.",
+                photo_url: "https://i.imgur.com/J2dbefG.png",
                 user_id: rand(1..5),
-                category_ids: [1, 5])
+                category_ids: [2, 4])
 
 Product.create!(name: "Unsolvable Rubik's Cube",
                 price: 10,
