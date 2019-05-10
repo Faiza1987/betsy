@@ -3,8 +3,7 @@ class ProductsController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update]
 
   def index
-    # @products = Product.all
-    @products = Product.where(retired: false)
+    @products = Product.all
   end
 
   def new
@@ -19,9 +18,9 @@ class ProductsController < ApplicationController
       flash[:success] = "Product added!"
       redirect_to product_path(@product.id)
     else
-      @product.errors.messages.each do |field, message|
-        flash.now[field] = message
-      end
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Cannot create product"
+      flash.now[:messages] = @product.errors.messages
 
       render :new, status: :bad_request
     end
@@ -35,7 +34,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id], retired: false)
+    @product = Product.find_by(id: params[:id])
 
     if @product.nil?
       flash[:error] = "Unknown product"
@@ -52,9 +51,9 @@ class ProductsController < ApplicationController
       flash[:success] = "Update successful!"
       redirect_to product_path(@product.id)
     else
-      @product.errors.messages.each do |field, message|
-        flash.now[field] = message
-      end
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Cannot update product"
+      flash.now[:messages] = @product.errors.messages
       render :edit, status: :bad_request
     end
   end
@@ -75,19 +74,6 @@ class ProductsController < ApplicationController
       flash[:success] = "Succesfully deleted!"
       redirect_to products_path
     end
-  end
-
-  # NEW CODE
-  def retire_product
-    if !@product.retired
-      @product.update(retired: true)
-      flash[:success] = "#{@producyt.name} has been retired and is no longer available for sale."
-    else
-      @product.update(retired: false)
-      flash[:success] = "Product is in stock and available for sale."
-    end
-
-    redirect_back fallback_location: product_path(@product.id)
   end
 
   private

@@ -9,7 +9,7 @@
   <% end %>
   <div class="product-wrapper">
   <% @products.each do |product| %>
-    <% if !@product.retired %>
+    <% if !product.retired %>
       <div class="box-wrapper">
         <div class="box">
         <%= image_tag(product.photo_url, size: "200x200") %>

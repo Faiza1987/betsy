@@ -56,21 +56,10 @@ class OrdersController < ApplicationController
       cookies.delete :order_id
       redirect_to order_path(@order.id)
     else
-      @order_item.errors.messages.each do |field, messages|
-        flash.now[field] = messages
-      end
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Cannot place order"
+      flash.now[:messages] = @order.errors.messages
       render :edit, status: :bad_request
-    end
-
-    # NEW CODE
-    if @order.orderitem_ids.length != 0
-      @specific_product = OrderItem.where(order_id: @order.id)
-    
-      @specific_product.orderitem_ids.each do |order|
-        if order.product.retired
-          order.destroy
-        end
-      end
     end
   end
 

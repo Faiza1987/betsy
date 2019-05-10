@@ -33,7 +33,7 @@
           <tr> 
             <td><%= product.id %></td>
             <td><%= link_to product.name, user_product_path(@user.id, product.id), method: :get %></td>
-            <td><%= product.orderitem_ids.size %></td>
+            <td><%= product.nums_sold_so_far %></td>
             <td><%= product.stock %></td>
             <td><%= link_to "Edit", edit_user_product_path(@user.id, product.id), method: :get %></td>
           </tr>
