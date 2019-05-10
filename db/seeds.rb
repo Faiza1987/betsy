@@ -101,10 +101,18 @@ Product.create!(name: "Lovely Lamp Shade",
                 user_id: rand(1..5),
                 category_ids: [2])
 
-Product.create!(name: "Tricksy T-Shirt",
-                price: 25,
+Product.create!(name: "Instant Heart Attack",
+                price: 20,
                 stock: 200,
-                description: "Put our logo on your body, ya freak.",
-                photo_url: "https://i.imgur.com/XhrnBHY.png",
+                description: "Techie friend feelin' themselves too much? This resin-based 'coffee spill' will knock them off their high horse.",
+                photo_url: "https://i.imgur.com/GBbAgWH.png",
                 user_id: rand(1..5),
                 category_ids: [2, 4])
+
+# Product.create!(name: "Tricksy T-Shirt",
+#                 price: 25,
+#                 stock: 200,
+#                 description: "Put our logo on your body, ya freak.",
+#                 photo_url: "https://i.imgur.com/XhrnBHY.png",
+#                 user_id: rand(1..5),
+#                 category_ids: [2, 4])
