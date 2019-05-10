@@ -15,6 +15,8 @@ describe OrdersController do
         # delete all orderitems because this is the middle table connecting user, product and order
         orderitems(:trick).destroy
         orderitems(:treat).destroy
+        orderitems(:halloween).destroy
+        orderitems(:candy).destroy
 
         get orders_path
         expect(flash[:message]).must_equal "You do not have any existing orders"
@@ -29,11 +31,10 @@ describe OrdersController do
         must_respond_with :success
       end
 
-      it "should display flash error if given invalid order id" do
+      it "should create a new order or use existing order from cookies if given an invalid order id" do
         get order_path("INVALID ID")
-        expect(flash[:error]).must_equal "Unknown order"
-        must_respond_with :redirect
-        must_redirect_to root_path
+        expect(cookies[:order_id]).wont_be_nil
+        must_respond_with :ok
       end
     end
   end

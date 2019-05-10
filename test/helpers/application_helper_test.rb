@@ -11,7 +11,7 @@ describe ApplicationHelper do
 
       # Assert
       expect(formatted_date).must_include date.to_s
-      expect(formatted_date).must_include "2 days ago"
+      expect(formatted_date).must_include "days ago"
     end
 
     it "gives back the string [unknown] when date is nil" do
