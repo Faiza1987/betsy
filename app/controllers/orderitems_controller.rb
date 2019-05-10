@@ -92,7 +92,7 @@ class OrderitemsController < ApplicationController
 
   def get_order_id
     if cookies[:order_id].nil?
-      cookies[:order_id] = Order.create.id
+      cookies[:order_id] = Order.create(status: "pending").id
       return cookies[:order_id]
     else
       return cookies[:order_id]

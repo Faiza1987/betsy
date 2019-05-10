@@ -59,7 +59,7 @@
             <% if cookies[:order_id] %>
               <a class="nav-link"><%= link_to "Shopping Cart", order_path(cookies[:order_id]) %> </a>
             <% else %>
-              <a class="nav-link"><%= link_to "Shopping Cart" %> </a>
+              <a class="nav-link"><%= link_to "Shopping Cart", order_path(0)%> </a>
             <% end %>
           </li>
           </div>
