@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy, :retire_product]
   before_action :require_login, only: [:new, :create, :edit, :update]
 
   def index
-    @products = Product.all
+    # @products = Product.all
+    @products = Product.where(retired: false)
   end
 
   def new
@@ -34,7 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id], retired: false)
 
     if @product.nil?
       flash[:error] = "Unknown product"
@@ -74,6 +75,19 @@ class ProductsController < ApplicationController
       flash[:success] = "Succesfully deleted!"
       redirect_to products_path
     end
+  end
+
+  # NEW CODE
+  def retire_product
+    if !@product.retired
+      @product.update(retired: true)
+      flash[:success] = "#{@producyt.name} has been retired and is no longer available for sale."
+    else
+      @product.update(retired: false)
+      flash[:success] = "Product is in stock and available for sale."
+    end
+
+    redirect_back fallback_location: product_path(@product.id)
   end
 
   private
