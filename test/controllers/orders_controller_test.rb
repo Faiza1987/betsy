@@ -91,7 +91,7 @@ describe OrdersController do
         expect(cookies[:order_id]).must_equal ""
 
         must_respond_with :redirect
-        must_redirect_to order_path(sample_order.id)
+        must_redirect_to confirm_order_path
       end
     end
   end

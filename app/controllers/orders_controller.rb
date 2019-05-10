@@ -53,9 +53,9 @@ class OrdersController < ApplicationController
     @order.update_attributes(:status => "Paid")
 
     if is_successful
-      flash[:result_text] = "Order was placed successully"
+      flash.now[:result_text] = "Order was placed successully"
       cookies.delete :order_id
-      redirect_to order_path(@order.id)
+      redirect_to confirm_order_path(@order.id)
     else
       flash.now[:status] = :failure
       flash.now[:result_text] = "Cannot place order"

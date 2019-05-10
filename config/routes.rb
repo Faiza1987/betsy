@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # NEW ROUTE
   patch "/users/:uid/products/:id/retire_product", to: "products#retire_product", as: "retire_product"
-  
+
   # nested routes
   resources :categories do
     resources :products, only: [:index]
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   # May have to change this route, maybe we don't need this page. this sounds like a view rendering
   # where we will render the order show page. If it is a new order, we will render the sentence "Order Confirmed!"
-  get "/order/:id/confirmation", to: "orders#confirmation", as: "confirm_order"
+  get "/order/:id/confirmations", to: "confirmations#index", as: "confirm_order"
 
   # NEED A ROUTE FOR CONNECTING USER BY ID TO PRODUCT BY ID TO ORDER_ITEM
 end

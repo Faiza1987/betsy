@@ -1,7 +1,7 @@
 <div class="back-color">
   <section>
-  <% if cookies[:order_id] %>
-    <h3>Order</h3>
+    <h3>Order Confirmation</h3>
+    <% @order = Order.find_by(id: params[:id]) %>
     <ul>
       <% @order.orderitem_ids.each do |id| %>
         <% order_item = Orderitem.find_by(id: id)%>
@@ -10,12 +10,8 @@
           <%= product.name %>
           <%= "Price: $#{product.price}" %>
           <%= "Quantity: #{order_item.quantity}" %> 
-          <u><%= link_to "Edit", edit_orderitem_path(id) %></u>
-          <u><%= link_to "Delete", orderitem_path(id), method: :delete, data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %></u>
-          <%= button_to "Check Out", edit_order_path(params[:id]), method: :get %>   
         </li>
       <% end %>
     </ul>
-  <% end %>
   </section>
 </div>
