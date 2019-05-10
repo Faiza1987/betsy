@@ -12,13 +12,16 @@ class User < ApplicationRecord
     return Product.where(user_id: self.id)
   end
 
-  def total_revenue
+  def total_revenue(status)
     total = 0
     products = find_user_products
     products.each do |product|
       product.orderitem_ids.each do |id|
         order_item = Orderitem.find_by(id: id)
-        total += product.price * order_item.quantity
+        order = Order.find_by(id: order_item.order_id)
+        if order.status == status
+          total += product.price * order_item.quantity
+        end
       end
     end
     return total

@@ -1,39 +1,73 @@
-<section>
-  <h4>Welcome <%= @user.username %>!</h4>
-</section>
+<section class="dashboard">
+  <div class="row welcome">
+    <section class="col">
+      <h3>Welcome <%= @user.username %>!</h3>
+      <p> Became a merchant: <%= render_date @user.created_at %></p>
+    </section>
 
-<section>
-  <h3><%= link_to "Add a new product", new_user_product_path(@user.id), method: :get %></h3>
-</section>
+    <section class="col metrics">
+      <h3>Total Revenue: <%= @user.total_revenue("pending") + @user.total_revenue("Paid") %></h3>
+      <p>Pending: <%= @user.total_revenue("pending") %></p>
+      <p>Paid: <%= @user.total_revenue("Paid") %></p>
+    </section>
+  </div>
 
-<section class="all-products">
-  <h3>Your existing products</h3>
-  <ul>
-  <% @user.products.each do |product| %>
-    <li>
-      <%= link_to product.name, user_product_path(@user.id, product.id), method: :get %>
-      <%= link_to "Edit", edit_user_product_path(@user.id, product.id), method: :get %>
-    </li>
-  <% end %>
-  </ul>
-</section>
+  <section class="all-products">
+    <h3>Manage your products</h3>
+    <section>
+      <p><%= button_to "Add a new product", new_user_product_path(@user.id), method: :get, class: "btn btn-light" %></p>
+    </section>
+    <h5>Your existing products</h5>
+    <table class="table-hover product-table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Quantity Sold</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.products.each do |product| %>
+          <tr> 
+            <td><%= product.id %></td>
+            <td><%= link_to product.name, user_product_path(@user.id, product.id), method: :get %></td>
+            <td><%= product.orderitem_ids.size %></td>
+            <td><%= product.stock %></td>
+            <td><%= link_to "Edit", edit_user_product_path(@user.id, product.id), method: :get %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
-<section class="metrics">
-  <h3>Total Revenue: <%= @user.total_revenue %></h3>
+  <section class="order-monitor">
+    <h3>Manage your orders</h3>
+    <% pending_orders = @user.count_orders("pending") %>
+    <% paid_orders = @user.count_orders("Paid") %>
+    <h5>Pending orders: <%= pending_orders.length %></h5>
+    
+    <h5>Paid orders: <%= paid_orders.length %></h5>
+    <table class="table-hover order-table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Customer Email</th>
+          <th scope="col">Mailing Address</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <% paid_orders. each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= link_to order.name, order_path(order.id) %></td>
+          <td><%= order.email %></td>
+          <td><%= order.mailing_address %></td>
+          <td><%= order.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </section>
 </section>
-
-<section class="order-monitor">
-  <% pending_orders = @user.count_orders("pending") %>
-  <% paid_orders = @user.count_orders("Paid") %>
-  <h3>Pending orders: <%= pending_orders.length %></h3>
-  
-  <h3>Paid orders: <%= paid_orders.length %></h3>
-  <ul>
-    <% paid_orders. each do |order| %>
-      <h4>Order # <%= order.id %></h4>
-      <li>Name: <%= order.name %></li>
-      <li>Email: <%= order.email %></li>
-      <li>Mailing Address: <%= order.mailing_address %></li>
-    <% end %>
-  </ul>
-</ul>
