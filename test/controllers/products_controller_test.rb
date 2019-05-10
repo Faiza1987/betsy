@@ -23,7 +23,7 @@ describe ProductsController do
     describe "show" do
       it "should respond with success for show existing product" do
         product = products(:chair)
-        get products_path(product.id)
+        get product_path(product.id)
         must_respond_with :success
       end
 
@@ -101,8 +101,16 @@ describe ProductsController do
           post products_path, params: test_input
         }.wont_change("Product.count")
 
-        expect(flash[:name]).must_equal ["can't be blank"]
-        expect(flash[:stock]).must_equal ["can't be blank", "is not a number"]
+        flash[:messages].each do |key, value|
+          if key == :name
+            expect(value).must_equal ["can't be blank"]
+          end
+
+          if key == :stock
+            expect(value).must_equal ["can't be blank", "is not a number"]
+          end
+        end
+
         must_respond_with :bad_request
       end
     end
@@ -175,8 +183,11 @@ describe ProductsController do
           patch product_path(product_to_update), params: test_input
         }.wont_change("Product.count")
 
-        expect(flash[:name]).must_equal ["can't be blank"]
-        must_respond_with :bad_request
+        flash.now[:messages].each do |key, value|
+          if key == :name
+            expect(value).must_equal ["can't be blank"]
+          end
+        end
       end
     end
 

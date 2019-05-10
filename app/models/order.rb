@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   has_many :orderitems
   has_many :products, :through => :orderitems
+  validates :status, presence: true
 
   # validates :name, presence: true
   # validates :email, presence: true
@@ -15,7 +16,7 @@ class Order < ApplicationRecord
     self.orderitems.each do |item|
       total += item.calculate_cost
     end
-    total
+    return total
   end
 
   def find_order_item_merchants

@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  validates :price, presence: true, numericality: {:greater_than => 0}
-  validates :stock, presence: true, numericality: {:only_integer => true, :greater_than_or_equal_to => 0}
+  validates :price, presence: true, numericality: { :greater_than => 0 }
+  validates :stock, presence: true, numericality: { :only_integer => true, :greater_than_or_equal_to => 0 }
 
   has_and_belongs_to_many :categories
   belongs_to :user
@@ -9,8 +9,8 @@ class Product < ApplicationRecord
   has_many :orderitems
   has_many :orders, :through => :orderitems
 
-  scope :category, -> (category) { where category: category }
-  scope :user, -> (user) { where user: user }
+  scope :category, ->(category) { where category: category }
+  scope :user, ->(user) { where user: user }
 
   def average_rating
     num_ratings = self.reviews.count
@@ -23,5 +23,14 @@ class Product < ApplicationRecord
 
     average = (total / num_ratings)
     return average
+  end
+
+  def nums_sold_so_far
+    count = 0
+    self.orderitem_ids.each do |id|
+      order_item = Orderitem.find_by(id: id)
+      count += order_item.quantity
+    end
+    return count
   end
 end

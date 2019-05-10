@@ -1,34 +1,82 @@
-<div class="back-color">
-<section>
-  <h3>Welcome <%= @user.username %>!</h3>
-</section>
+<section class="dashboard">
+  <div class="row welcome">
+    <section class="col">
+      <h3>Welcome <%= @user.username %>!</h3>
+      <p> Became a merchant: <%= render_date @user.created_at %></p>
+    </section>
 
-<section>
-  <%= link_to "Add a new product", new_user_product_path(@user.id), method: :get %>
-</section>
+    <section class="col metrics">
+      <h3>Total Revenue: <%= number_to_currency(@user.total_revenue("pending") + @user.total_revenue("Paid")) %></h3>
+      <p>Pending: <%= number_to_currency(@user.total_revenue("pending")) %></p>
+      <p>Paid: <%= number_to_currency(@user.total_revenue("Paid")) %></p>
+    </section>
+  </div>
 
-<section class="all-products">
-  <ul>
-  <% @user.products.each do |product| %>
-    <li>
-      <%= link_to product.name, user_product_path(@user.id, product.id), method: :get %>
-      <%= link_to "Edit", edit_user_product_path(@user.id, product.id), method: :get %>
-    </li>
-  <% end %>
-  </ul>
-</section>
+  <section class="all-products">
+    <h3>Manage your products</h3>
+    <section>
+      <p><%= button_to "Add a new product", new_user_product_path(@user.id), method: :get, class: "btn btn-outline-light" %></p>
+    </section>
+    <h5>Your existing products</h5>
+    <table class="table-hover product-table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Quantity Sold</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.products.each do |product| %>
+          <tr> 
+            <td><%= product.id %></td>
+            <td><%= link_to product.name, user_product_path(@user.id, product.id), method: :get %></td>
+            <td><%= product.nums_sold_so_far %></td>
+            <td><%= product.stock %></td>
+            <td><%= link_to "Edit", edit_user_product_path(@user.id, product.id), method: :get %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
 
-<section class="all-orders">
-  <ul>
-  <% @user.products.each do |product| %>
-    <% product.orderitem_ids.each do |id| %>
-      <% order = Order.find_by(id: Orderitem.find_by(id: id).order_id) %>
-      <li>
-        <%= order.id %>
-        <%= order.status %>
-      </li>
+  <section class="order-monitor">
+    <h3>Manage your orders</h3>
+    <% pending_orders = @user.count_orders("pending") %>
+    <% paid_orders = @user.count_orders("Paid") %>
+
+    <h5>Pending orders: <%= pending_orders.length %></h5>
+
+    <h5>Paid orders: <%= paid_orders.length %></h5>
+    <% paid_orders.each do |order| %>
+      <h5 class="btn btn-outline-light order-details" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <span>Order # <%= order.id %></span>
+        <span>Subtotal: <%= number_to_currency(order.calculate_total) %> </span>
+        <span>Status: <%= order.status %></span>
+      </h5>
+      <table class="collapse" id="collapseExample">
+        <thead>
+          <tr>
+            <th scope="col">Order item ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.orderitem_ids.each do |id| %>
+            <% order_item = Orderitem.find_by(id: id) %>
+            <tr>
+              <td><%= order_item.id %></td>
+              <td><%= Product.find_by(id: order_item.product_id).name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= order_item.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
-  <% end %>
-  </ul>
+  </section>
 </section>
-</div>

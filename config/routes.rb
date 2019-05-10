@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "homepage/index"
+  # get "homepage/index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "homepage#index"
 
@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :orders
   resources :products
 
+  # NEW ROUTE
+  patch "/users/:uid/products/:id/retire_product", to: "products#retire_product", as: "retire_product"
+  
   # nested routes
   resources :categories do
     resources :products, only: [:index]

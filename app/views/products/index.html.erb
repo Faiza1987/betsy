@@ -9,13 +9,15 @@
   <% end %>
   <div class="product-wrapper">
   <% @products.each do |product| %>
-    <div class="box-wrapper">
-      <div class="box">
-      <%= link_to image_tag(product.photo_url, size: "200x200"), product_path(product.id) %>
-      <br>
-      <%= link_to product.name, product_path(product.id) %>
+    <% if !product.retired %>
+      <div class="box-wrapper">
+        <div class="box">
+        <%= image_tag(product.photo_url, size: "200x200") %>
+        <br>
+        <%= link_to product.name, product_path(product.id) %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
   </div>
 </div>
