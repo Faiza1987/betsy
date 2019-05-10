@@ -21,7 +21,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
+    get_order_id
+    @order = Order.find_by(id: cookies[:order_id])
     if @order.nil?
       flash[:error] = "Unknown order"
       redirect_to root_path
@@ -64,6 +65,15 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def get_order_id
+    if cookies[:order_id].nil?
+      cookies[:order_id] = Order.create(status: "pending").id
+      return cookies[:order_id]
+    else
+      return cookies[:order_id]
+    end
+  end
 
   def order_params
     return params.permit(

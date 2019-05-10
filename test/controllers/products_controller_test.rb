@@ -23,7 +23,7 @@ describe ProductsController do
     describe "show" do
       it "should respond with success for show existing product" do
         product = products(:chair)
-        get products_path(product.id)
+        get product_path(product.id)
         must_respond_with :success
       end
 

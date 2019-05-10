@@ -59,7 +59,7 @@ Product.create!(name: "Drop a Deuce via Mail",
                 description: "When you just can't give a shit anymore, we can do it for you.",
                 photo_url: "https://i.imgur.com/UtsUkL7.png",
                 user_id: rand(1..5),
-                category_ids: [2, 3])
+                category_ids: [3])
 
 Product.create!(name: "Forbidden Lollipops",
                 price: 5,
@@ -69,13 +69,13 @@ Product.create!(name: "Forbidden Lollipops",
                 user_id: rand(1..5),
                 category_ids: [2])
 
-Product.create!(name: "Chocolate Anaconda",
+Product.create!(name: "Chamber of Secrets",
                 price: 5,
                 stock: 200,
-                description: "Guaranteed to taste delicious even if you don't got buns, hun.",
-                photo_url: "https://i.imgur.com/xP3MtfZ.jpg",
+                description: "Nearly impossible to open, it is sure to turn that new package excitement right around.  What's our secret?  Nothing, it's just a USPS box.",
+                photo_url: "https://i.imgur.com/J2dbefG.png",
                 user_id: rand(1..5),
-                category_ids: [1, 5])
+                category_ids: [2, 4])
 
 Product.create!(name: "Unsolvable Rubik's Cube",
                 price: 10,
@@ -89,14 +89,30 @@ Product.create!(name: "Magic Trump T-Shirt",
                 price: 10,
                 stock: 200,
                 description: "Add a little heat and things get spicy. In Spanish for a little extra boost to your Conservative relatives' blood pressure.",
-                photo_url: "https://i.imgur.com/5NGq1RT.jpg",
+                photo_url: "https://i.imgur.com/1OvklrP.png",
                 user_id: rand(1..5),
                 category_ids: [2, 4])
 
-Product.create!(name: "Tricksy T-Shirt",
-                price: 25,
+Product.create!(name: "Lovely Lamp Shade",
+                price: 15,
                 stock: 200,
-                description: "Put our logo on your body, ya freak.",
-                photo_url: "https://i.imgur.com/XhrnBHY.png",
+                description: "If your mom doesn't hit you with la chancla once she gets over her fear, we'll give you a full refund.",
+                photo_url: "https://i.imgur.com/QcT1Ngz.png",
+                user_id: rand(1..5),
+                category_ids: [2])
+
+Product.create!(name: "Instant Heart Attack",
+                price: 20,
+                stock: 200,
+                description: "Techie friend feelin' themselves too much? This resin-based 'coffee spill' will knock them off their high horse.",
+                photo_url: "https://i.imgur.com/GBbAgWH.png",
                 user_id: rand(1..5),
                 category_ids: [2, 4])
+
+# Product.create!(name: "Tricksy T-Shirt",
+#                 price: 25,
+#                 stock: 200,
+#                 description: "Put our logo on your body, ya freak.",
+#                 photo_url: "https://i.imgur.com/XhrnBHY.png",
+#                 user_id: rand(1..5),
+#                 category_ids: [2, 4])
