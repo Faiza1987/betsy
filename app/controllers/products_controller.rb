@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy, :retire_product]
   before_action :require_login, only: [:new, :create, :edit, :update]
 
   def index
@@ -18,9 +18,9 @@ class ProductsController < ApplicationController
       flash[:success] = "Product added!"
       redirect_to product_path(@product.id)
     else
-      @product.errors.messages.each do |field, message|
-        flash.now[field] = message
-      end
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Cannot create product"
+      flash.now[:messages] = @product.errors.messages
 
       render :new, status: :bad_request
     end
@@ -51,9 +51,9 @@ class ProductsController < ApplicationController
       flash[:success] = "Update successful!"
       redirect_to product_path(@product.id)
     else
-      @product.errors.messages.each do |field, message|
-        flash.now[field] = message
-      end
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Cannot update product"
+      flash.now[:messages] = @product.errors.messages
       render :edit, status: :bad_request
     end
   end

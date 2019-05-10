@@ -1,3 +1,38 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.dashboard {
+  background-color: #022b1a;
+  opacity: 0.8;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.all-products {
+  padding: 15px;
+  border-top: solid 2px white;
+}
+
+.order-monitor {
+  padding: 15px;
+  border-top: solid 2px white;
+}
+
+.order-details {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  height: 100;
+}
+
+thead {
+  border-top: solid 1px white;
+  border-bottom: solid 1px white;
+}
