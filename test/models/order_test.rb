@@ -25,7 +25,7 @@ describe Order do
 
   describe "calculate_total" do
     it "returns total cost of an order" do
-      order.calculate_total.must_equal 1000
+      order.calculate_total.must_equal 103500
     end
 
     it "returns 0 when there are no orderitems" do
