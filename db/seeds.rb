@@ -72,7 +72,7 @@ Product.create!(name: "Forbidden Lollipops",
 Product.create!(name: "Chamber of Secrets",
                 price: 5,
                 stock: 200,
-                description: "Nearly impossible to open, it is sure to turn that new package excitement right around.  What's our secret?  Nothing.  It's just a USPS box.",
+                description: "Nearly impossible to open, it is sure to turn that new package excitement right around.  What's our secret?  Nothing, it's just a USPS box.",
                 photo_url: "https://i.imgur.com/J2dbefG.png",
                 user_id: rand(1..5),
                 category_ids: [2, 4])
@@ -92,6 +92,14 @@ Product.create!(name: "Magic Trump T-Shirt",
                 photo_url: "https://i.imgur.com/5NGq1RT.jpg",
                 user_id: rand(1..5),
                 category_ids: [2, 4])
+
+Product.create!(name: "Lovely Lamp Shade",
+                price: 15,
+                stock: 200,
+                description: "If your mom doesn't hit you with la chancla once she gets over her fear, we'll give you a full refund.",
+                photo_url: "https://i.imgur.com/QcT1Ngz.png",
+                user_id: rand(1..5),
+                category_ids: [2])
 
 Product.create!(name: "Tricksy T-Shirt",
                 price: 25,
