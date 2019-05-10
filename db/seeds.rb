@@ -89,7 +89,7 @@ Product.create!(name: "Magic Trump T-Shirt",
                 price: 10,
                 stock: 200,
                 description: "Add a little heat and things get spicy. In Spanish for a little extra boost to your Conservative relatives' blood pressure.",
-                photo_url: "https://i.imgur.com/5NGq1RT.jpg",
+                photo_url: "https://i.imgur.com/1OvklrP.png",
                 user_id: rand(1..5),
                 category_ids: [2, 4])
 
