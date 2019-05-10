@@ -9,9 +9,14 @@
     <h2> <%=@product.description %></h2>
   </section>
   <section class="product-show-margin">
-    <p>Stock: <%= @product.stock %></p>
+    <p>Stock: &nbsp;
+    <% if @product.stock == 0 %>
+      <%= "Out of Stock" %>
+      <% else %>
+    <%= @product.stock %></p>
     <p>Price: <%= "$#{@product.price}" %></p>
     <p><%= render template: "orderitems/_new" %></p>
+    <% end %>
     <h3 class="h-border">Reviews</h3>
     <p> Average rating:
       <% if @product.reviews.count == 0 %>
