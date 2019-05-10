@@ -16,7 +16,7 @@ class Order < ApplicationRecord
     self.orderitems.each do |item|
       total += item.calculate_cost
     end
-    total
+    return total
   end
 
   def find_order_item_merchants

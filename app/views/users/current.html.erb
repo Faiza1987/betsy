@@ -6,16 +6,16 @@
     </section>
 
     <section class="col metrics">
-      <h3>Total Revenue: <%= @user.total_revenue("pending") + @user.total_revenue("Paid") %></h3>
-      <p>Pending: <%= @user.total_revenue("pending") %></p>
-      <p>Paid: <%= @user.total_revenue("Paid") %></p>
+      <h3>Total Revenue: <%= number_to_currency(@user.total_revenue("pending") + @user.total_revenue("Paid")) %></h3>
+      <p>Pending: <%= number_to_currency(@user.total_revenue("pending")) %></p>
+      <p>Paid: <%= number_to_currency(@user.total_revenue("Paid")) %></p>
     </section>
   </div>
 
   <section class="all-products">
     <h3>Manage your products</h3>
     <section>
-      <p><%= button_to "Add a new product", new_user_product_path(@user.id), method: :get, class: "btn btn-light" %></p>
+      <p><%= button_to "Add a new product", new_user_product_path(@user.id), method: :get, class: "btn btn-outline-light" %></p>
     </section>
     <h5>Your existing products</h5>
     <table class="table-hover product-table">
@@ -46,28 +46,37 @@
     <h3>Manage your orders</h3>
     <% pending_orders = @user.count_orders("pending") %>
     <% paid_orders = @user.count_orders("Paid") %>
+
     <h5>Pending orders: <%= pending_orders.length %></h5>
-    
+
     <h5>Paid orders: <%= paid_orders.length %></h5>
-    <table class="table-hover order-table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Customer Name</th>
-          <th scope="col">Customer Email</th>
-          <th scope="col">Mailing Address</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <% paid_orders. each do |order| %>
-        <tr>
-          <td><%= order.id %></td>
-          <td><%= link_to order.name, order_path(order.id) %></td>
-          <td><%= order.email %></td>
-          <td><%= order.mailing_address %></td>
-          <td><%= order.status %></td>
-        </tr>
-      <% end %>
-    </table>
+    <% paid_orders.each do |order| %>
+      <h5 class="btn btn-outline-light order-details" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <span>Order # <%= order.id %></span>
+        <span>Subtotal: <%= number_to_currency(order.calculate_total) %> </span>
+        <span>Status: <%= order.status %></span>
+      </h5>
+      <table class="collapse" id="collapseExample">
+        <thead>
+          <tr>
+            <th scope="col">Order item ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.orderitem_ids.each do |id| %>
+            <% order_item = Orderitem.find_by(id: id) %>
+            <tr>
+              <td><%= order_item.id %></td>
+              <td><%= Product.find_by(id: order_item.product_id).name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= order_item.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </section>
 </section>

@@ -9,8 +9,6 @@
   margin-bottom: 10px;
 }
 
-
-
 .all-products {
   padding: 15px;
   border-top: solid 2px white;
@@ -19,6 +17,14 @@
 .order-monitor {
   padding: 15px;
   border-top: solid 2px white;
+}
+
+.order-details {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: left;
 }
 
 table {
