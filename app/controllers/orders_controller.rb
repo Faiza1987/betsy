@@ -61,6 +61,17 @@ class OrdersController < ApplicationController
       end
       render :edit, status: :bad_request
     end
+
+    # NEW CODE
+    if @order.orderitem_ids.length != 0
+      @specific_product = OrderItem.where(order_id: @order.id)
+    
+      @specific_product.orderitem_ids.each do |order|
+        if order.product.retired
+          order.destroy
+        end
+      end
+    end
   end
 
   private

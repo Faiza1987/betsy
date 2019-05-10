@@ -19,5 +19,14 @@
     User has no products.
     </section>
   <% end %>
+
+  <!-- NEW CODE -->
+  <% products = Product.where(user_id: @user.id, retired: false) %>
+  <% if !products.retired %>
+    <p> Available <%= link_to "Make Unavailable", retire_product_path(@product.id), method: :patch %> </p>
+  <% else %>
+    <p> Unavailable <%= link_to "Make Available", retire_product_path(@product.id), method: :patch %></p>
+  <% end %>
+
 </section>
 </div>
