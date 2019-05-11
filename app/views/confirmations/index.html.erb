@@ -1,17 +1,35 @@
-<div class="back-color">
+<div class="back-color" id="confirmation-page">
   <section>
     <h3>Order Confirmation</h3>
-    <% @order = Order.find_by(id: params[:id]) %>
-    <ul>
-      <% @order.orderitem_ids.each do |id| %>
-        <% order_item = Orderitem.find_by(id: id)%>
-        <% product = Product.find_by(id: order_item.product_id) %>
-        <li>
-          <%= product.name %>
-          <%= "Price: $#{product.price}" %>
-          <%= "Quantity: #{order_item.quantity}" %> 
-        </li>
-      <% end %>
-    </ul>
+    
+    <table class="table-hover product-table">
+      <thead>
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Item Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order = Order.find_by(id: params[:id]) %>
+        <% @order.orderitem_ids.each do |id| %>
+          <% order_item = Orderitem.find_by(id: id)%>
+          <% product = Product.find_by(id: order_item.product_id) %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= number_to_currency(product.price) %></td>
+            <td><%= order_item.quantity %></td>
+            <td><%= number_to_currency(product.price * order_item.quantity) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </section>
+
+  <section class="sub-total">
+    <p>Sub-total: <%= number_to_currency(@order.calculate_total) %></p>
+  </section>
+
+  <h3>Thank you for shopping with us!</h3>
 </div>

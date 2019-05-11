@@ -1,21 +1,45 @@
-<div class="back-color">
+<div class="back-color" id="show-order">
   <section>
   <% if cookies[:order_id] %>
     <h3>Order</h3>
-    <ul>
-      <% @order.orderitem_ids.each do |id| %>
-        <% order_item = Orderitem.find_by(id: id)%>
-        <% product = Product.find_by(id: order_item.product_id) %>
-        <li>
-          <%= product.name %>
-          <%= "Price: $#{product.price}" %>
-          <%= "Quantity: #{order_item.quantity}" %> 
-          <u><%= link_to "Edit", edit_orderitem_path(id) %></u>
-          <u><%= link_to "Delete", orderitem_path(id), method: :delete, data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %></u>
-          <%= button_to "Check Out", edit_order_path(params[:id]), method: :get %>   
-        </li>
-      <% end %>
-    </ul>
+    <table class="table-hover product-table">
+      <thead>
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Item Total</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.orderitem_ids.each do |id| %>
+          <% order_item = Orderitem.find_by(id: id)%>
+          <% product = Product.find_by(id: order_item.product_id) %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= number_to_currency(product.price) %></td>
+            <td><%= order_item.quantity %></td>
+            <td><%= number_to_currency(product.price * order_item.quantity) %></td>
+            <td>
+              <%= link_to "Edit", edit_orderitem_path(id), class: "btn" %>
+              <%= link_to "Remove", orderitem_path(id), method: :delete, class: "btn", data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %>
+            </td> 
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
+  </section>
+
+  <section class="sub-total">
+    <p>Sub-total: <%= number_to_currency(@order.calculate_total) %></p>
+  </section>
+
+  <section class="order-buttons">
+    <% if cookies[:order_id] %>
+      <p><%= link_to "Check Out", edit_order_path(params[:id]), class: "btn btn-outline-light" %></p>
+      <p><%= link_to "Keep Shopping", root_path, class: "btn btn-outline-light" %></p>
+    <% end %>
   </section>
 </div>

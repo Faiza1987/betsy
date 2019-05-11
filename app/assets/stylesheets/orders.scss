@@ -1,3 +1,31 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#show-order {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding: 2rem;
+}
+
+#billing-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 5rem;
+}
+
+#title-checkout {
+  padding-bottom: 2rem;
+}
+
+.order-buttons p {
+  display: inline;
+}
+
+.sub-total {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-content: center;
+}

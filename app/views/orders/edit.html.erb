@@ -1,37 +1,53 @@
-<div class="back-color">
-  <h3>Please provide your billing information:</h3>
+<div class="back-color" id="billing-form">
+  <section id="title-checkout">
+    <h3>Please provide your billing information:</h3>
+  </section>
   
   <%= form_with model: @order, url: order_path(cookies[:order_id]), method: :patch do |f| %>
-
-    <%= f.label :name %>
-    <br>
-    <%= f.text_field :name %>
-    <br>
-    <%= f.label :email %>
-    <br>
-    <%= f.text_field :email %>
-    <br>
-    <%= f.label :mailing_address %>
-    <br>
-    <%= f.text_field :mailing_address %>
-    <br>
-    <%= f.label :credit_card_num %>
-    <br>
-    <%= f.text_field :credit_card_num %>
-    <br>
-    <%= f.label :card_expiration_date %>
-    <br>
-    <%= f.text_field :card_expiration_date %>
-    <br>
-    <%= f.label :cvv %>
-    <br>
-    <%= f.text_field :cvv %>
-    <br>
-    <%= f.label :billing_zip_code %>
-    <br>
-    <%= f.text_field :billing_zip_code %>
-    <br>
-    <br>
-    <%= f.submit "Place Order" %>
+    <div class="form-group row">
+      <%= f.label :name, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :email, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :mailing_address, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :mailing_address, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :credit_card_num, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :credit_card_num, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :card_expiration_date, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :card_expiration_date, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :cvv, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :cvv, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :billing_zip_code, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :billing_zip_code, class: "form-control " %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.submit "Place Order", class: "btn btn-light" %>
+    </div>
   <% end %>
 </div>

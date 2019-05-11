@@ -29,13 +29,13 @@ class User < ApplicationRecord
 
   def count_orders(status)
     products = find_user_products
-    pending_orders = []
+    orders = []
     products.each do |product|
       product.orderitem_ids.each do |id|
         order_item = Orderitem.find_by(id: id)
-        pending_orders.concat(Order.where(id: order_item.order_id, status: status))
+        orders.concat(Order.where(id: order_item.order_id, status: status))
       end
     end
-    return pending_orders
+    return orders
   end
 end
