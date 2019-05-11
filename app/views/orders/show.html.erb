@@ -18,7 +18,11 @@
         <tr>
           <td><%= product.name %></td>
           <td><%= number_to_currency(product.price) %></td>
-          <td><%= order_item.quantity %></td>
+          <td>
+            <%= fields_for :order_items do |order_item_fields| %>
+              <%= number_field(:order_items, :quantity, in: 1..1000, step: 1) %>
+            <% end %>
+          </td>
           <td><%= number_to_currency(product.price * order_item.quantity) %></td>
           <td>
             <%= link_to "Edit", edit_orderitem_path(id), class: "btn" %>

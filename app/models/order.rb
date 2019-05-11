@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   has_many :orderitems
   has_many :products, :through => :orderitems
   validates :status, presence: true
+  accepts_nested_attributes_for :orderitems
 
   # validates :name, presence: true
   # validates :email, presence: true
