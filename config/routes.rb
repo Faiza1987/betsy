@@ -29,9 +29,7 @@ Rails.application.routes.draw do
     resources :orderitems, only: [:new, :create]
   end
 
-  resources :orders do
-    resources :orderitems, only: [:edit, :update, :destroy]
-  end
+  resources :shoppingcarts, only: [:show]
 
   # custom routes
 
