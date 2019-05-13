@@ -14,7 +14,6 @@
     <tbody>
       <% @order.orderitem_ids.each do |id| %>
         <% order_item = Orderitem.find_by(id: id)%>
-        <% limit = order_item.max_quantity %>
         <% product = Product.find_by(id: order_item.product_id) %>
         <tr>
           <td><%= product.name %></td>
