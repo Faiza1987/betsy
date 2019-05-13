@@ -1,6 +1,5 @@
-<h1>Update order item</h1>
-
-<%= form_with model: @order_item, class: "edit-orderitem" do |f| %>
+<%= form_with model: @order_item, method: :patch do |f| %>
+  <%= f.hidden_field :order_id %>
   <%= f.hidden_field :product_id %>
   
   <%= @product_name %>

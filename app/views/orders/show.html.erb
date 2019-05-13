@@ -18,11 +18,16 @@
         <tr>
           <td><%= product.name %></td>
           <td><%= number_to_currency(product.price) %></td>
-          <td><%= order_item.quantity %></td>
+          <td>
+            <%= form_for order_item, remote: true, class: "form-inline" do |f| %>
+              <%= f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control-sm", min: 1 %>
+              <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.submit "Update Quantity", class: "btn btn-outline-light btn-sm" %>
+            <% end %>
+          </td>
           <td><%= number_to_currency(product.price * order_item.quantity) %></td>
           <td>
-            <%= link_to "Edit", edit_orderitem_path(id), class: "btn" %>
-            <%= link_to "Remove", orderitem_path(id), method: :delete, class: "btn", data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %>
+            <%= link_to "Remove", orderitem_path(id), method: :delete, class: "btn btn-outline-danger btn-sm", data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %>
           </td> 
         </tr>
       <% end %>
