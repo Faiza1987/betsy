@@ -1,32 +1,44 @@
 <div class="page-container">
 <section>
-    <h1 class="home-head-wrapper"> Your one stop shop for alienating everyone you know! </h1>
-    <h2 class="home-head-wrapper"><u>Tricksy's Picksys</u></h2>
+  <h1 class="home-head-wrapper"> Your one stop shop for alienating everyone you know! </h1>
+  <h2 class="home-head-wrapper"><u>Tricksy's Picksys</u></h2>
 </section>
 <br>
 <div class="product-wrapper">
+  <% first_product = Product.find_by(name: "Drop a Deuce via Mail") %>
+  <% second_product = Product.find_by(name: "Forbidden Lollipops") %>
+  <% third_product = Product.find_by(name: "Magic Trump T-Shirt") %>
+  
+  <% if first_product.photo_url %>
     <div class="box">
-        <%= link_to image_tag(Product.find_by(name: "Drop a Deuce via Mail").photo_url, size: "200x200"), product_path(Product.find_by(name: "Drop a Deuce via Mail")) %>
+        <%= link_to image_tag(first_product.photo_url, size: "200x200"), product_path(Product.find_by(name: "Drop a Deuce via Mail")) %>
     </div>
+  <% end %>
+
+  <% if second_product.photo_url %>
     <div class="box">
-        <%= link_to image_tag(Product.find_by(name: "Forbidden Lollipops").photo_url, size: "200x200"), product_path(Product.find_by(name: "Forbidden Lollipops")) %>
+        <%= link_to image_tag(second_product.photo_url, size: "200x200"), product_path(Product.find_by(name: "Forbidden Lollipops")) %>
     </div>
+  <% end %>
+
+  <% if third_product.photo_url %>
     <div class="box">
-        <%= link_to image_tag(Product.find_by(name: "Magic Trump T-Shirt").photo_url, size: "200x200"), product_path(Product.find_by(name: "Magic Trump T-Shirt")) %>
+        <%= link_to image_tag(third_product.photo_url, size: "200x200"), product_path(Product.find_by(name: "Magic Trump T-Shirt")) %>
     </div>
+  <% end %>
 </div>
-    <h2 class="home-head-wrapper"><u>Satisfied Customers</u></h2>
-    <br>
-    <div class="product-wrapper">
-    <div class="box">
-        <p>I don't know how I would have gotten rid of all those pesky people who loved me without Drop a Deuce. High quality ish right here! <br><br> -Seattle Freeze</p>
-    </div>
-    <div class="box">
-    <p>My coworkers kept taking my candy off my desk and thanks to Tricksy's Forbidden Lollipops, they don't even talk to me anymore! <br><br> -That Coworker</p>
-    </div>
-    <div class="box">
-    <p>Thank heavens I had the Magic Trump T-shirt for Christmas with family!  My elderly grandmother was getting way too familiar. <br><br> -Black Sheep</p>
-    </div>
+  <h2 class="home-head-wrapper"><u>Satisfied Customers</u></h2>
+  <br>
+  <div class="product-wrapper">
+  <div class="box">
+      <p>I don't know how I would have gotten rid of all those pesky people who loved me without Drop a Deuce. High quality ish right here! <br><br> -Seattle Freeze</p>
+  </div>
+  <div class="box">
+  <p>My coworkers kept taking my candy off my desk and thanks to Tricksy's Forbidden Lollipops, they don't even talk to me anymore! <br><br> -That Coworker</p>
+  </div>
+  <div class="box">
+  <p>Thank heavens I had the Magic Trump T-shirt for Christmas with family!  My elderly grandmother was getting way too familiar. <br><br> -Black Sheep</p>
+  </div>
 </div>
 </div>
 

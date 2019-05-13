@@ -1,7 +1,9 @@
 <div class="back-color">
   <section>
     <h2><%= @product.name.upcase %></h2>
-    <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
+    <% if @product.photo_url %>
+      <p><%= image_tag(@product.photo_url, :size => "300x300") %></p>
+    <% end %>
   </section>
   <section>
     <br>
