@@ -14,18 +14,16 @@
     <tbody>
       <% @order.orderitem_ids.each do |id| %>
         <% order_item = Orderitem.find_by(id: id)%>
+        <% limit = order_item.max_quantity %>
         <% product = Product.find_by(id: order_item.product_id) %>
         <tr>
           <td><%= product.name %></td>
           <td><%= number_to_currency(product.price) %></td>
           <td>
-            <%= fields_for :order_items do |order_item_fields| %>
-              <%= number_field(:order_items, :quantity, in: 1..1000, step: 1) %>
-            <% end %>
+            <%= render "orderitems/edit", locals: { :scope => order_item}%>
           </td>
           <td><%= number_to_currency(product.price * order_item.quantity) %></td>
           <td>
-            <%= link_to "Edit", edit_orderitem_path(id), class: "btn" %>
             <%= link_to "Remove", orderitem_path(id), method: :delete, class: "btn", data: {confirm: "Are you would like to remove #{product.name} from your cart?"} %>
           </td> 
         </tr>
