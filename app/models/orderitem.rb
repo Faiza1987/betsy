@@ -17,11 +17,6 @@ class Orderitem < ApplicationRecord
     self.quantity += amount_to_add
   end
 
-  def max_quantity
-    product = Product.find_by(id: self.product_id)
-    return product.stock
-  end
-
   private
 
   # custom validation
