@@ -25,6 +25,11 @@ class Product < ApplicationRecord
     return average
   end
 
+  def self.top_three
+    sorted_products = Product.all.sort { |a, b| b.average_rating <=> a.average_rating }
+    return sorted_products[0..2]
+  end
+
   def nums_sold_so_far
     count = 0
     self.orderitem_ids.each do |id|

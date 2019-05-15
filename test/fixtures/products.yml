@@ -11,3 +11,9 @@ chair:
   price: 2500
   stock: 100
   user: amyw
+
+koolaid:
+  name: some sweet drinks
+  price: 200
+  stock: 100
+  user: laneia

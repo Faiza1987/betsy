@@ -5,26 +5,11 @@
 </section>
 <br>
 <div class="product-wrapper">
-  <% first_product = Product.find_by(name: "Drop a Deuce via Mail") %>
-  <% second_product = Product.find_by(name: "Forbidden Lollipops") %>
-  <% third_product = Product.find_by(name: "Magic Trump T-Shirt") %>
-  
-  <% if first_product.photo_url %>
-    <div class="box">
-        <%= link_to image_tag(first_product.photo_url, size: "200x200"), product_path(Product.find_by(name: "Drop a Deuce via Mail")) %>
-    </div>
-  <% end %>
-
-  <% if second_product.photo_url %>
-    <div class="box">
-        <%= link_to image_tag(second_product.photo_url, size: "200x200"), product_path(Product.find_by(name: "Forbidden Lollipops")) %>
-    </div>
-  <% end %>
-
-  <% if third_product.photo_url %>
-    <div class="box">
-        <%= link_to image_tag(third_product.photo_url, size: "200x200"), product_path(Product.find_by(name: "Magic Trump T-Shirt")) %>
-    </div>
+  <% top_three = Product.top_three %>
+  <% top_three.each do |product| %>
+    <% if product.photo_url %>
+      <%= link_to image_tag(product.photo_url, size: "200x200"), product_path(product), class: "top_three_products" %>
+    <% end %>
   <% end %>
 </div>
   <h2 class="home-head-wrapper"><u>Satisfied Customers</u></h2>
