@@ -1,3 +1,11 @@
 // Place all the styles related to the homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.top_three_products {
+  text-align: center
+}
+
+.top_three_products:hover {
+  background-color: #022b1a
+}

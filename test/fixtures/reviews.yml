@@ -2,5 +2,25 @@
 
 one:
   rating: 1
-  description: "MyString"
+  description: bad
   product: chair
+
+two:
+  rating: 2
+  description: not so bad
+  product: chair
+
+three:
+  rating: 5
+  description: great
+  product: honk
+
+four:
+  rating: 2
+  description: meh
+  product: honk
+
+five:
+  rating: 4
+  description: not there yet
+  product: koolaid

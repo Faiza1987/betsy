@@ -70,6 +70,11 @@ class ProductsController < ApplicationController
       return redirect_to product_path(params[:id]), :alert => "Must be the merchant of this product to edit."
     end
 
+    # delete all associated reviews before deleting the products
+    @product.reviews.each do |review|
+      review.destroy
+    end
+
     if @product.destroy
       flash[:success] = "Succesfully deleted!"
       redirect_to products_path
